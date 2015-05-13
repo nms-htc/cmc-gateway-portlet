@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_GW_ProductMessageService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProductMessageServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProductMessageServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProductMessageServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProductMessageService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+</deployment>

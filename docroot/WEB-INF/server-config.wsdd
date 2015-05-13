@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<globalConfiguration>
+		<parameter name="adminPassword" value="admin" />
+		<parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl" />
+		<parameter name="sendXsiTypes" value="true" />
+		<parameter name="sendMultiRefs" value="true" />
+		<parameter name="sendXMLDeclaration" value="true" />
+		<parameter name="axis.sendMinimizedElements" value="true" />
+		<requestFlow>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="session" />
+			</handler>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="request" />
+				<parameter name="extension" value=".jwr" />
+			</handler>
+		</requestFlow>
+	</globalConfiguration>
+	<handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder" />
+	<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper" />
+	<handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" />
+	<transport name="http">
+		<requestFlow>
+			<handler type="URLMapper" />
+			<handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</requestFlow>
+	</transport>
+	<transport name="local">
+		<responseFlow>
+			<handler type="LocalResponder" />
+		</responseFlow>
+	</transport>
+	<service name="Plugin_GW_AppDomainService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.AppDomainServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="AppDomainServiceSoap" />
+		<parameter name="wsdlServiceElement" value="AppDomainServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_AppDomainService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_CommandActionService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.CommandActionServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="CommandActionServiceSoap" />
+		<parameter name="wsdlServiceElement" value="CommandActionServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_CommandActionService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_CommandEntryService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.CommandEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="CommandEntryServiceSoap" />
+		<parameter name="wsdlServiceElement" value="CommandEntryServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_CommandEntryService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProductActionService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProductActionServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProductActionServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProductActionServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProductActionService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProductCategoryService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProductCategoryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProductCategoryServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProductCategoryServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProductCategoryService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProductEntryService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProductEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProductEntryServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProductEntryServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProductEntryService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProductMessageService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProductMessageServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProductMessageServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProductMessageServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProductMessageService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProductRouteService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProductRouteServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProductRouteServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProductRouteServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProductRouteService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProvisioningActionService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProvisioningActionServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProvisioningActionServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProvisioningActionServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProvisioningActionService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProvisioningEntryService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProvisioningEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProvisioningEntryServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProvisioningEntryServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProvisioningEntryService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProvisioningMessageService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProvisioningMessageServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProvisioningMessageServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProvisioningMessageServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProvisioningMessageService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+	<service name="Plugin_GW_ProvisioningRouteService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProvisioningRouteServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProvisioningRouteServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProvisioningRouteServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProvisioningRouteService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+</deployment>

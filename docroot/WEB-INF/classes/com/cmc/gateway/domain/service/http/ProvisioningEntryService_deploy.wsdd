@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_GW_ProvisioningEntryService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.cmc.gateway.domain.service.http.ProvisioningEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ProvisioningEntryServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ProvisioningEntryServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_GW_ProvisioningEntryService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.domain.gateway.cmc.com" />
+	</service>
+</deployment>

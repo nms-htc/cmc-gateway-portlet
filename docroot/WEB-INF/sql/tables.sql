@@ -1,0 +1,241 @@
+create table GW_AppDomain (
+	domainId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	TYPE VARCHAR(75) null,
+	CODE VARCHAR(75) null,
+	title VARCHAR(75) null,
+	value VARCHAR(75) null,
+	defaultValue BOOLEAN,
+	description VARCHAR(75) null
+);
+
+create table GW_CommandAction (
+	actionId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commandId LONG,
+	productId LONG,
+	actionType VARCHAR(75) null,
+	subscriberType INTEGER,
+	actionName VARCHAR(75) null,
+	nextActionType VARCHAR(75) null,
+	nextCommandId LONG,
+	processClass VARCHAR(75) null,
+	processMethod VARCHAR(75) null,
+	properties STRING null,
+	description STRING null
+);
+
+create table GW_CommandEntry (
+	commandId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	provisioningType VARCHAR(75) null,
+	CODE VARCHAR(75) null,
+	title VARCHAR(75) null,
+	priority INTEGER,
+	timeout INTEGER,
+	retryEnable BOOLEAN,
+	maxRetry INTEGER,
+	logEnable BOOLEAN,
+	properties STRING null,
+	status INTEGER,
+	description STRING null
+);
+
+create table GW_ProductAction (
+	actionId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	actionType VARCHAR(75) null,
+	subscriberType INTEGER,
+	productId LONG,
+	balanceType VARCHAR(75) null,
+	commandId LONG,
+	description STRING null
+);
+
+create table GW_ProductCategory (
+	categoryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	title VARCHAR(75) null,
+	description STRING null
+);
+
+create table GW_ProductEntry (
+	productId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	categoryId LONG,
+	productType VARCHAR(75) null,
+	CODE VARCHAR(75) null,
+	title VARCHAR(75) null,
+	sku VARCHAR(75) null,
+	price DOUBLE,
+	subscriberTypes VARCHAR(75) null,
+	termOfUse BOOLEAN,
+	termPeriod INTEGER,
+	termUnit VARCHAR(75) null,
+	subscription BOOLEAN,
+	subscriptionUnit VARCHAR(75) null,
+	subscriptionPeriod INTEGER,
+	gracePeriod INTEGER,
+	graceUnit VARCHAR(75) null,
+	status INTEGER,
+	description STRING null
+);
+
+create table GW_ProductMessage (
+	messageId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	productId LONG,
+	actionType VARCHAR(75) null,
+	channel VARCHAR(75) null,
+	cause VARCHAR(75) null,
+	languageId VARCHAR(75) null,
+	campaignId LONG,
+	causeValue INTEGER,
+	content STRING null,
+	description STRING null
+);
+
+create table GW_ProductRoute (
+	routeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	channel VARCHAR(75) null,
+	serviceAddress VARCHAR(75) null,
+	keyword VARCHAR(75) null,
+	openTime VARCHAR(75) null,
+	closedTime VARCHAR(75) null,
+	checkBalance BOOLEAN,
+	smsMinParams INTEGER,
+	smsMaxParams INTEGER,
+	actionType VARCHAR(75) null,
+	productId LONG,
+	campaignId LONG,
+	languageId VARCHAR(75) null,
+	synchronous BOOLEAN,
+	createOrder BOOLEAN,
+	timeout INTEGER,
+	maxRegisterDaily INTEGER,
+	duplicateScan INTEGER,
+	checkSpam BOOLEAN,
+	fraudTimes INTEGER,
+	fraudPeriod INTEGER,
+	fraudUnit VARCHAR(75) null,
+	rejectUnit VARCHAR(75) null,
+	rejectPeriod INTEGER,
+	baseChargeEnable BOOLEAN,
+	chargingAmount DOUBLE,
+	notifyOwner BOOLEAN,
+	notifyDeliver BOOLEAN,
+	sendAdvertising BOOLEAN,
+	checkPromotion BOOLEAN,
+	topupEnable BOOLEAN,
+	properties STRING null,
+	queueName VARCHAR(75) null,
+	processClass VARCHAR(75) null,
+	processMethod VARCHAR(75) null,
+	status INTEGER,
+	startDate DATE null,
+	expirationDate DATE null,
+	description STRING null
+);
+
+create table GW_ProvisioningAction (
+	actionId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	provisioningId LONG,
+	commandId LONG,
+	priority INTEGER,
+	timeout INTEGER,
+	retryEnable BOOLEAN,
+	maxRetry INTEGER,
+	logEnable BOOLEAN,
+	processClass VARCHAR(75) null,
+	processMethod VARCHAR(75) null,
+	properties STRING null,
+	status INTEGER,
+	description STRING null
+);
+
+create table GW_ProvisioningEntry (
+	provisioningId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	provisioningType VARCHAR(75) null,
+	CODE VARCHAR(75) null,
+	title VARCHAR(75) null,
+	connectionHost VARCHAR(75) null,
+	connectionPort INTEGER,
+	connectByUserName VARCHAR(75) null,
+	connectByPassword VARCHAR(75) null,
+	processClass VARCHAR(75) null,
+	processMethod VARCHAR(75) null,
+	properties STRING null,
+	status INTEGER,
+	description STRING null
+);
+
+create table GW_ProvisioningMessage (
+	messageId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	provisioningId LONG,
+	responseCode VARCHAR(75) null,
+	cause VARCHAR(75) null,
+	causeValue INTEGER,
+	description STRING null
+);
+
+create table GW_ProvisioningRoute (
+	routeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	provisioningId LONG,
+	provisioningType VARCHAR(75) null,
+	routeType VARCHAR(75) null,
+	routeKey VARCHAR(75) null,
+	description STRING null
+);

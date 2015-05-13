@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.cmc.gateway.domain.model.AppDomain" />
+	<import class="com.cmc.gateway.domain.model.CommandAction" />
+	<import class="com.cmc.gateway.domain.model.CommandEntry" />
+	<import class="com.cmc.gateway.domain.model.ProductAction" />
+	<import class="com.cmc.gateway.domain.model.ProductCategory" />
+	<import class="com.cmc.gateway.domain.model.ProductEntry" />
+	<import class="com.cmc.gateway.domain.model.ProductMessage" />
+	<import class="com.cmc.gateway.domain.model.ProductRoute" />
+	<import class="com.cmc.gateway.domain.model.ProvisioningAction" />
+	<import class="com.cmc.gateway.domain.model.ProvisioningEntry" />
+	<import class="com.cmc.gateway.domain.model.ProvisioningMessage" />
+	<import class="com.cmc.gateway.domain.model.ProvisioningRoute" />
+	<class name="com.cmc.gateway.domain.model.impl.AppDomainImpl" table="GW_AppDomain">
+		<cache usage="read-write" />
+		<id name="domainId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" column="TYPE" />
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="CODE" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="defaultValue" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.CommandActionImpl" table="GW_CommandAction">
+		<cache usage="read-write" />
+		<id name="actionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="commandId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="productId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="actionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subscriberType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="actionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nextActionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nextCommandId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="processClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="processMethod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="properties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.CommandEntryImpl" table="GW_CommandEntry">
+		<cache usage="read-write" />
+		<id name="commandId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="provisioningType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="CODE" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="timeout" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="retryEnable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="maxRetry" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="logEnable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="properties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProductActionImpl" table="GW_ProductAction">
+		<cache usage="read-write" />
+		<id name="actionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="actionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subscriberType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="productId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="balanceType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="commandId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProductCategoryImpl" table="GW_ProductCategory">
+		<cache usage="read-write" />
+		<id name="categoryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProductEntryImpl" table="GW_ProductEntry">
+		<cache usage="read-write" />
+		<id name="productId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="categoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="productType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="CODE" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sku" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="price" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="subscriberTypes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="termOfUse" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="termPeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="termUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subscription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="subscriptionUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subscriptionPeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="gracePeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="graceUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProductMessageImpl" table="GW_ProductMessage">
+		<cache usage="read-write" />
+		<id name="messageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="productId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="actionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="channel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cause" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="languageId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="campaignId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="causeValue" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProductRouteImpl" table="GW_ProductRoute">
+		<cache usage="read-write" />
+		<id name="routeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="channel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serviceAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keyword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="openTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="closedTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="checkBalance" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="smsMinParams" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="smsMaxParams" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="actionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="productId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="campaignId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="languageId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="synchronous" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="createOrder" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="timeout" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="maxRegisterDaily" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="duplicateScan" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="checkSpam" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="fraudTimes" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="fraudPeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="fraudUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="rejectUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="rejectPeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="baseChargeEnable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="chargingAmount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="notifyOwner" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="notifyDeliver" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="sendAdvertising" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="checkPromotion" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="topupEnable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="properties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="queueName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="processClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="processMethod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProvisioningActionImpl" table="GW_ProvisioningAction">
+		<cache usage="read-write" />
+		<id name="actionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="provisioningId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commandId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="timeout" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="retryEnable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="maxRetry" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="logEnable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="processClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="processMethod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="properties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProvisioningEntryImpl" table="GW_ProvisioningEntry">
+		<cache usage="read-write" />
+		<id name="provisioningId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="provisioningType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="CODE" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="connectionHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="connectionPort" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="connectByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="connectByPassword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="processClass" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="processMethod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="properties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProvisioningMessageImpl" table="GW_ProvisioningMessage">
+		<cache usage="read-write" />
+		<id name="messageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="provisioningId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="responseCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cause" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="causeValue" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.cmc.gateway.domain.model.impl.ProvisioningRouteImpl" table="GW_ProvisioningRoute">
+		<cache usage="read-write" />
+		<id name="routeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="provisioningId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="provisioningType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="routeType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="routeKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

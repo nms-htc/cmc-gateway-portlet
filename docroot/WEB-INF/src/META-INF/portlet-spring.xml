@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.cmc.gateway.domain.service.AppDomainLocalService" class="com.cmc.gateway.domain.service.impl.AppDomainLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.AppDomainService" class="com.cmc.gateway.domain.service.impl.AppDomainServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.AppDomainPersistence" class="com.cmc.gateway.domain.service.persistence.AppDomainPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.CommandActionLocalService" class="com.cmc.gateway.domain.service.impl.CommandActionLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.CommandActionService" class="com.cmc.gateway.domain.service.impl.CommandActionServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.CommandActionPersistence" class="com.cmc.gateway.domain.service.persistence.CommandActionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.CommandEntryLocalService" class="com.cmc.gateway.domain.service.impl.CommandEntryLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.CommandEntryService" class="com.cmc.gateway.domain.service.impl.CommandEntryServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.CommandEntryPersistence" class="com.cmc.gateway.domain.service.persistence.CommandEntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProductActionLocalService" class="com.cmc.gateway.domain.service.impl.ProductActionLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProductActionService" class="com.cmc.gateway.domain.service.impl.ProductActionServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProductActionPersistence" class="com.cmc.gateway.domain.service.persistence.ProductActionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProductCategoryLocalService" class="com.cmc.gateway.domain.service.impl.ProductCategoryLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProductCategoryService" class="com.cmc.gateway.domain.service.impl.ProductCategoryServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProductCategoryPersistence" class="com.cmc.gateway.domain.service.persistence.ProductCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProductEntryLocalService" class="com.cmc.gateway.domain.service.impl.ProductEntryLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProductEntryService" class="com.cmc.gateway.domain.service.impl.ProductEntryServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProductEntryPersistence" class="com.cmc.gateway.domain.service.persistence.ProductEntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProductMessageLocalService" class="com.cmc.gateway.domain.service.impl.ProductMessageLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProductMessageService" class="com.cmc.gateway.domain.service.impl.ProductMessageServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProductMessagePersistence" class="com.cmc.gateway.domain.service.persistence.ProductMessagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProductRouteLocalService" class="com.cmc.gateway.domain.service.impl.ProductRouteLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProductRouteService" class="com.cmc.gateway.domain.service.impl.ProductRouteServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProductRoutePersistence" class="com.cmc.gateway.domain.service.persistence.ProductRoutePersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningActionLocalService" class="com.cmc.gateway.domain.service.impl.ProvisioningActionLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningActionService" class="com.cmc.gateway.domain.service.impl.ProvisioningActionServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProvisioningActionPersistence" class="com.cmc.gateway.domain.service.persistence.ProvisioningActionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningEntryLocalService" class="com.cmc.gateway.domain.service.impl.ProvisioningEntryLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningEntryService" class="com.cmc.gateway.domain.service.impl.ProvisioningEntryServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProvisioningEntryPersistence" class="com.cmc.gateway.domain.service.persistence.ProvisioningEntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningMessageLocalService" class="com.cmc.gateway.domain.service.impl.ProvisioningMessageLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningMessageService" class="com.cmc.gateway.domain.service.impl.ProvisioningMessageServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProvisioningMessagePersistence" class="com.cmc.gateway.domain.service.persistence.ProvisioningMessagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningRouteLocalService" class="com.cmc.gateway.domain.service.impl.ProvisioningRouteLocalServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.ProvisioningRouteService" class="com.cmc.gateway.domain.service.impl.ProvisioningRouteServiceImpl" />
+	<bean id="com.cmc.gateway.domain.service.persistence.ProvisioningRoutePersistence" class="com.cmc.gateway.domain.service.persistence.ProvisioningRoutePersistenceImpl" parent="basePersistence" />
+</beans>

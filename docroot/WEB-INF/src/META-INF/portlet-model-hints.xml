@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.cmc.gateway.domain.model.AppDomain">
+		<field name="domainId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="type" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="code" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="title" type="String">
+			<hint name="max-width">150</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="defaultValue" type="boolean" />
+		<field name="description" type="String" />
+	</model>
+	<model name="com.cmc.gateway.domain.model.CommandAction">
+		<field name="actionId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="commandId" type="long" />
+		<field name="productId" type="long" />
+		<field name="actionType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="subscriberType" type="int" />
+		<field name="actionName" type="String">
+			<hint name="max-width">150</hint>
+		</field>
+		<field name="nextActionType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="nextCommandId" type="long" />
+		<field name="processClass" type="String">
+			<hint name="max-width">200</hint>
+		</field>
+		<field name="processMethod" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="properties" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.CommandEntry">
+		<field name="commandId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="provisioningType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="code" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="title" type="String">
+			<hint name="max-width">150</hint>
+		</field>
+		<field name="priority" type="int" />
+		<field name="timeout" type="int" />
+		<field name="retryEnable" type="boolean" />
+		<field name="maxRetry" type="int" />
+		<field name="logEnable" type="boolean" />
+		<field name="properties" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="status" type="int" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProductAction">
+		<field name="actionId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="actionType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="subscriberType" type="int">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="productId" type="long" />
+		<field name="balanceType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="commandId" type="long" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProductCategory">
+		<field name="categoryId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="title" type="String">
+			<hint name="max-width">150</hint>
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProductEntry">
+		<field name="productId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="categoryId" type="long" />
+		<field name="productType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="code" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="title" type="String">
+			<hint name="max-width">155</hint>
+		</field>
+		<field name="sku" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="price" type="double" />
+		<field name="subscriberTypes" type="String" />
+		<field name="termOfUse" type="boolean" />
+		<field name="termPeriod" type="int" />
+		<field name="termUnit" type="String">
+			<hint name="max-width">25</hint>
+		</field>
+		<field name="subscription" type="boolean" />
+		<field name="subscriptionUnit" type="String">
+			<hint name="max-width">25</hint>
+		</field>
+		<field name="subscriptionPeriod" type="int" />
+		<field name="gracePeriod" type="int" />
+		<field name="graceUnit" type="String">
+			<hint name="max-width">25</hint>
+		</field>
+		<field name="status" type="int" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProductMessage">
+		<field name="messageId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="productId" type="long" />
+		<field name="actionType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="channel" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="cause" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="languageId" type="String" />
+		<field name="campaignId" type="long" />
+		<field name="causeValue" type="int" />
+		<field name="content" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProductRoute">
+		<field name="routeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="channel" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="serviceAddress" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="keyword" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="openTime" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="closedTime" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="checkBalance" type="boolean" />
+		<field name="smsMinParams" type="int" />
+		<field name="smsMaxParams" type="int" />
+		<field name="actionType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="productId" type="long" />
+		<field name="campaignId" type="long" />
+		<field name="languageId" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="synchronous" type="boolean" />
+		<field name="createOrder" type="boolean" />
+		<field name="timeout" type="int" />
+		<field name="maxRegisterDaily" type="int" />
+		<field name="duplicateScan" type="int" />
+		<field name="checkSpam" type="boolean" />
+		<field name="fraudTimes" type="int" />
+		<field name="fraudPeriod" type="int" />
+		<field name="fraudUnit" type="String">
+			<hint name="max-width">15</hint>
+		</field>
+		<field name="rejectUnit" type="String">
+			<hint name="max-width">15</hint>
+		</field>
+		<field name="rejectPeriod" type="int" />
+		<field name="baseChargeEnable" type="boolean" />
+		<field name="chargingAmount" type="double" />
+		<field name="notifyOwner" type="boolean" />
+		<field name="notifyDeliver" type="boolean" />
+		<field name="sendAdvertising" type="boolean" />
+		<field name="checkPromotion" type="boolean" />
+		<field name="topupEnable" type="boolean" />
+		<field name="properties" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="queueName" type="String" />
+		<field name="processClass" type="String">
+			<hint name="max-width">200</hint>
+		</field>
+		<field name="processMethod" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="status" type="int" />
+		<field name="startDate" type="Date" />
+		<field name="expirationDate" type="Date" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProvisioningAction">
+		<field name="actionId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="provisioningId" type="long" />
+		<field name="commandId" type="long" />
+		<field name="priority" type="int" />
+		<field name="timeout" type="int" />
+		<field name="retryEnable" type="boolean" />
+		<field name="maxRetry" type="int" />
+		<field name="logEnable" type="boolean" />
+		<field name="processClass" type="String">
+			<hint name="max-width">200</hint>
+		</field>
+		<field name="processMethod" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="properties" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="status" type="int" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProvisioningEntry">
+		<field name="provisioningId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="provisioningType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="code" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="title" type="String">
+			<hint name="max-width">150</hint>
+		</field>
+		<field name="connectionHost" type="String">
+			<hint name="max-width">50</hint>
+		</field>
+		<field name="connectionPort" type="int" />
+		<field name="connectByUserName" type="String">
+			<hint name="max-width">25</hint>
+		</field>
+		<field name="connectByPassword" type="String">
+			<hint name="max-width">25</hint>
+		</field>
+		<field name="processClass" type="String">
+			<hint name="max-width">200</hint>
+		</field>
+		<field name="processMethod" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="properties" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="status" type="int" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProvisioningMessage">
+		<field name="messageId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="provisioningId" type="long" />
+		<field name="responseCode" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="cause" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="causeValue" type="int" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.cmc.gateway.domain.model.ProvisioningRoute">
+		<field name="routeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="provisioningId" type="long" />
+		<field name="provisioningType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="routeType" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="routeKey" type="String">
+			<hint name="max-width">75</hint>
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+</model-hints>

@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.GW", "com.cmc.gateway.domain.service", "cmc-gateway-portlet");

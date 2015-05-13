@@ -1,0 +1,422 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.AppDomainModelImpl">
+		<attributes>
+			<id name="domainId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="type">
+				<column name="TYPE" />
+			</basic>
+			<basic name="code">
+				<column name="CODE" />
+			</basic>
+			<basic name="title" />
+			<basic name="value" />
+			<basic name="defaultValue" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.CommandActionModelImpl">
+		<attributes>
+			<id name="actionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="commandId" />
+			<basic name="productId" />
+			<basic name="actionType" />
+			<basic name="subscriberType" />
+			<basic name="actionName" />
+			<basic name="nextActionType" />
+			<basic name="nextCommandId" />
+			<basic name="processClass" />
+			<basic name="processMethod" />
+			<basic name="properties" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.CommandEntryModelImpl">
+		<attributes>
+			<id name="commandId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="provisioningType" />
+			<basic name="code">
+				<column name="CODE" />
+			</basic>
+			<basic name="title" />
+			<basic name="priority" />
+			<basic name="timeout" />
+			<basic name="retryEnable" />
+			<basic name="maxRetry" />
+			<basic name="logEnable" />
+			<basic name="properties" />
+			<basic name="status" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProductActionModelImpl">
+		<attributes>
+			<id name="actionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="actionType" />
+			<basic name="subscriberType" />
+			<basic name="productId" />
+			<basic name="balanceType" />
+			<basic name="commandId" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProductCategoryModelImpl">
+		<attributes>
+			<id name="categoryId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="title" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProductEntryModelImpl">
+		<attributes>
+			<id name="productId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="categoryId" />
+			<basic name="productType" />
+			<basic name="code">
+				<column name="CODE" />
+			</basic>
+			<basic name="title" />
+			<basic name="sku" />
+			<basic name="price" />
+			<basic name="subscriberTypes" />
+			<basic name="termOfUse" />
+			<basic name="termPeriod" />
+			<basic name="termUnit" />
+			<basic name="subscription" />
+			<basic name="subscriptionUnit" />
+			<basic name="subscriptionPeriod" />
+			<basic name="gracePeriod" />
+			<basic name="graceUnit" />
+			<basic name="status" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProductMessageModelImpl">
+		<attributes>
+			<id name="messageId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="productId" />
+			<basic name="actionType" />
+			<basic name="channel" />
+			<basic name="cause" />
+			<basic name="languageId" />
+			<basic name="campaignId" />
+			<basic name="causeValue" />
+			<basic name="content" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProductRouteModelImpl">
+		<attributes>
+			<id name="routeId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="channel" />
+			<basic name="serviceAddress" />
+			<basic name="keyword" />
+			<basic name="openTime" />
+			<basic name="closedTime" />
+			<basic name="checkBalance" />
+			<basic name="smsMinParams" />
+			<basic name="smsMaxParams" />
+			<basic name="actionType" />
+			<basic name="productId" />
+			<basic name="campaignId" />
+			<basic name="languageId" />
+			<basic name="synchronous" />
+			<basic name="createOrder" />
+			<basic name="timeout" />
+			<basic name="maxRegisterDaily" />
+			<basic name="duplicateScan" />
+			<basic name="checkSpam" />
+			<basic name="fraudTimes" />
+			<basic name="fraudPeriod" />
+			<basic name="fraudUnit" />
+			<basic name="rejectUnit" />
+			<basic name="rejectPeriod" />
+			<basic name="baseChargeEnable" />
+			<basic name="chargingAmount" />
+			<basic name="notifyOwner" />
+			<basic name="notifyDeliver" />
+			<basic name="sendAdvertising" />
+			<basic name="checkPromotion" />
+			<basic name="topupEnable" />
+			<basic name="properties" />
+			<basic name="queueName" />
+			<basic name="processClass" />
+			<basic name="processMethod" />
+			<basic name="status" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProvisioningActionModelImpl">
+		<attributes>
+			<id name="actionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="provisioningId" />
+			<basic name="commandId" />
+			<basic name="priority" />
+			<basic name="timeout" />
+			<basic name="retryEnable" />
+			<basic name="maxRetry" />
+			<basic name="logEnable" />
+			<basic name="processClass" />
+			<basic name="processMethod" />
+			<basic name="properties" />
+			<basic name="status" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProvisioningEntryModelImpl">
+		<attributes>
+			<id name="provisioningId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="provisioningType" />
+			<basic name="code">
+				<column name="CODE" />
+			</basic>
+			<basic name="title" />
+			<basic name="connectionHost" />
+			<basic name="connectionPort" />
+			<basic name="connectByUserName" />
+			<basic name="connectByPassword" />
+			<basic name="processClass" />
+			<basic name="processMethod" />
+			<basic name="properties" />
+			<basic name="status" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProvisioningMessageModelImpl">
+		<attributes>
+			<id name="messageId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="provisioningId" />
+			<basic name="responseCode" />
+			<basic name="cause" />
+			<basic name="causeValue" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.cmc.gateway.domain.model.impl.ProvisioningRouteModelImpl">
+		<attributes>
+			<id name="routeId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="provisioningId" />
+			<basic name="provisioningType" />
+			<basic name="routeType" />
+			<basic name="routeKey" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.cmc.gateway.domain.model.impl.AppDomainImpl" name="AppDomain">
+		<table name="GW_AppDomain" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.CommandActionImpl" name="CommandAction">
+		<table name="GW_CommandAction" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.CommandEntryImpl" name="CommandEntry">
+		<table name="GW_CommandEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProductActionImpl" name="ProductAction">
+		<table name="GW_ProductAction" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProductCategoryImpl" name="ProductCategory">
+		<table name="GW_ProductCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProductEntryImpl" name="ProductEntry">
+		<table name="GW_ProductEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProductMessageImpl" name="ProductMessage">
+		<table name="GW_ProductMessage" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProductRouteImpl" name="ProductRoute">
+		<table name="GW_ProductRoute" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProvisioningActionImpl" name="ProvisioningAction">
+		<table name="GW_ProvisioningAction" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProvisioningEntryImpl" name="ProvisioningEntry">
+		<table name="GW_ProvisioningEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProvisioningMessageImpl" name="ProvisioningMessage">
+		<table name="GW_ProvisioningMessage" />
+		<attributes />
+	</entity>
+	<entity class="com.cmc.gateway.domain.model.impl.ProvisioningRouteImpl" name="ProvisioningRoute">
+		<table name="GW_ProvisioningRoute" />
+		<attributes />
+	</entity>
+</entity-mappings>

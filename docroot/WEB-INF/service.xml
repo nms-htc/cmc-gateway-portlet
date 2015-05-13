@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.cmc.gateway.domain">
+	<author>Richard Nguyen</author>
+	<namespace>GW</namespace>
+
+	<entity name="ProductCategory" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="categoryId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="title" />
+		</order>
+	</entity>
+
+	<entity name="ProductEntry" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="productId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="categoryId" type="long" />
+		<column name="productType" type="String" />
+		<column name="code" db-name="CODE" type="String" />
+		<column name="title" type="String" />
+		<column name="sku" type="String" />
+		<column name="price" type="double" />
+
+		<!-- Policy fields -->
+
+		<column name="subscriberTypes" type="String" />
+		<column name="termOfUse" type="boolean" />
+		<column name="termPeriod" type="int" />
+		<column name="termUnit" type="String" />
+		<column name="subscription" type="boolean" />
+		<column name="subscriptionUnit" type="String" />
+		<column name="subscriptionPeriod" type="int" />
+		<column name="gracePeriod" type="int" />
+		<column name="graceUnit" type="String" />
+
+		<column name="status" type="int" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="code" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Category" return-type="Collection">
+			<finder-column name="categoryId" />
+		</finder>
+
+		<finder name="Type" return-type="Collection">
+			<finder-column name="productType" />
+		</finder>
+
+		<finder name="Code" return-type="ProductEntry" unique="true">
+			<finder-column name="code" />
+		</finder>
+		
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status"/>
+		</finder>
+
+	</entity>
+
+	<entity name="ProductMessage" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="messageId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="productId" type="long" />
+		<column name="actionType" type="String" />
+		<column name="channel" type="String" />
+		<column name="cause" type="String" />
+		<column name="languageId" type="String" />
+		<column name="campaignId" type="long" />
+
+		<column name="causeValue" type="int" />
+		<column name="content" type="String" />
+
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="productId" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Product" return-type="Collection">
+			<finder-column name="productId" />
+		</finder>
+		
+		<finder name="Message" return-type="ProductMessage" unique="true">
+			<finder-column name="productId" />
+			<finder-column name="actionType" />
+			<finder-column name="channel" />
+		</finder>
+	</entity>
+
+	<entity name="ProductRoute" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="routeId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="channel" type="String" />
+		<column name="serviceAddress" type="String" />
+		<column name="keyword" type="String" />
+		<column name="openTime" type="String" />
+		<column name="closedTime" type="String" />
+
+		<column name="checkBalance" type="boolean" />
+		<column name="smsMinParams" type="int" />
+		<column name="smsMaxParams" type="int" />
+
+		<column name="actionType" type="String" />
+		<column name="productId" type="long" />
+		<column name="campaignId" type="long" />
+		<column name="languageId" type="String" />
+
+		<column name="synchronous" type="boolean" />
+		<column name="createOrder" type="boolean" />
+		<column name="timeout" type="int" />
+		<column name="maxRegisterDaily" type="int" />
+		<column name="duplicateScan" type="int" />
+
+		<column name="checkSpam" type="boolean" />
+		<column name="fraudTimes" type="int" />
+		<column name="fraudPeriod" type="int" />
+		<column name="fraudUnit" type="String" />
+		<column name="rejectUnit" type="String" />
+		<column name="rejectPeriod" type="int" />
+
+		<column name="baseChargeEnable" type="boolean" />
+		<column name="chargingAmount" type="double" />
+		<column name="notifyOwner" type="boolean" />
+		<column name="notifyDeliver" type="boolean" />
+		<column name="sendAdvertising" type="boolean" />
+		<column name="checkPromotion" type="boolean" />
+		<column name="topupEnable" type="boolean" />
+
+		<column name="properties" type="String" />
+		<column name="queueName" type="String" />
+		<column name="processClass" type="String" />
+		<column name="processMethod" type="String" />
+
+		<!-- Approval fields -->
+
+		<column name="status" type="int" />
+		<column name="startDate" type="Date" />
+		<column name="expirationDate" type="Date" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="channel" order-by="asc" />
+			<order-column name="serviceAddress" order-by="asc" />
+			<order-column name="keyword" order-by="asc" />
+			<order-column name="openTime" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Product" return-type="Collection" db-index="false">
+			<finder-column name="productId" />
+		</finder>
+
+		<finder name="Route" return-type="ProductRoute" unique="true">
+			<finder-column name="productId" />
+			<finder-column name="channel" />
+			<finder-column name="serviceAddress" />
+			<finder-column name="keyword" />
+		</finder>
+
+	</entity>
+
+	<entity name="ProductAction" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="actionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="actionType" type="String" />
+		<column name="subscriberType" type="int" />
+		<column name="productId" type="long" />
+		<column name="balanceType" type="String" />
+
+		<column name="commandId" type="long" />
+
+		<!-- Approval fields -->
+
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="actionType" order-by="asc" />
+			<order-column name="subscriberType" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Product" return-type="Collection" db-index="false">
+			<finder-column name="productId" />
+		</finder>
+
+		<!-- References -->
+	</entity>
+
+	<entity name="ProvisioningEntry" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="provisioningId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="provisioningType" type="String" />
+		<column name="code" db-name="CODE" type="String" />
+		<column name="title" type="String" />
+
+		<column name="connectionHost" type="String" />
+		<column name="connectionPort" type="int" />
+		<column name="connectByUserName" type="String" />
+		<column name="connectByPassword" type="String" />
+
+		<column name="processClass" type="String" />
+		<column name="processMethod" type="String" />
+		<column name="properties" type="String" />
+
+		<!-- Approval fields -->
+
+		<column name="status" type="int" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="code" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="ProvisioningEntry" unique="true">
+			<finder-column name="code" />
+		</finder>
+
+		<finder name="Type" return-type="Collection" db-index="false">
+			<finder-column name="provisioningType" />
+		</finder>
+	</entity>
+
+	<entity name="ProvisioningRoute" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="routeId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="provisioningId" type="long" />
+		<column name="provisioningType" type="String" />
+		<column name="routeType" type="String" />
+		<column name="routeKey" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="provisioningId" order-by="asc" />
+			<order-column name="routeType" order-by="asc" />
+			<order-column name="routeKey" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Route" return-type="Collection" db-index="false">
+			<finder-column name="provisioningType" />
+			<finder-column name="routeType" />
+			<finder-column name="routeKey" />
+		</finder>
+		<finder name="Provisioning" return-type="Collection" db-index="false">
+			<finder-column name="provisioningId" />
+		</finder>
+
+	</entity>
+	<entity name="ProvisioningAction" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="actionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="provisioningId" type="long" />
+		<column name="commandId" type="long" />
+
+		<column name="priority" type="int" />
+		<column name="timeout" type="int" />
+		<column name="retryEnable" type="boolean" />
+		<column name="maxRetry" type="int" />
+		<column name="logEnable" type="boolean" />
+
+		<column name="processClass" type="String" />
+		<column name="processMethod" type="String" />
+		<column name="properties" type="String" />
+
+		<column name="status" type="int" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="provisioningId" order-by="asc" />
+			<order-column name="commandId" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Provisioning" return-type="Collection" db-index="false">
+			<finder-column name="provisioningId" />
+		</finder>
+		<finder name="Command" return-type="Collection" db-index="false">
+			<finder-column name="commandId" />
+		</finder>
+		<finder name="P_C" return-type="ProvisioningAction" unique="true"
+			db-index="false">
+			<finder-column name="provisioningId" />
+			<finder-column name="commandId" />
+		</finder>
+	</entity>
+
+	<entity name="ProvisioningMessage" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="messageId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="provisioningId" type="long" />
+		<column name="responseCode" type="String" />
+		<column name="cause" type="String" />
+		<column name="causeValue" type="int" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="provisioningId" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Provisioning" return-type="Collection" db-index="false">
+			<finder-column name="provisioningId" />
+		</finder>
+		<finder name="ResponseCode" return-type="ProvisioningMessage"
+			unique="true">
+			<finder-column name="provisioningId" />
+			<finder-column name="responseCode" />
+		</finder>
+
+	</entity>
+
+	<entity name="CommandEntry" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commandId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="provisioningType" type="String" />
+		<column name="code" db-name="CODE" type="String" />
+		<column name="title" type="String" />
+
+		<column name="priority" type="int" />
+		<column name="timeout" type="int" />
+		<column name="retryEnable" type="boolean" />
+		<column name="maxRetry" type="int" />
+		<column name="logEnable" type="boolean" />
+		<column name="properties" type="String" />
+
+		<!-- Approval fields -->
+
+		<column name="status" type="int" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="code" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="CommandEntry" unique="true">
+			<finder-column name="code" />
+		</finder>
+
+		<finder name="Type" return-type="Collection">
+			<finder-column name="provisioningType" />
+		</finder>
+	</entity>
+	<entity name="CommandAction" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="actionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commandId" type="long" />
+		<column name="productId" type="long" />
+		<column name="actionType" type="String" />
+		<column name="subscriberType" type="int" />
+		<column name="actionName" type="String" />
+
+		<column name="nextActionType" type="String" />
+		<column name="nextCommandId" type="long" />
+		<column name="processClass" type="String" />
+		<column name="processMethod" type="String" />
+
+		<column name="properties" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="actionName" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Command" return-type="Collection" db-index="false">
+			<finder-column name="commandId" />
+		</finder>
+
+		<finder name="Product" return-type="Collection" db-index="false">
+			<finder-column name="productId" />
+		</finder>
+
+		<finder name="NextCommand" return-type="Collection" db-index="false">
+			<finder-column name="nextCommandId" />
+		</finder>
+
+		<finder name="NextAction" return-type="Collection" db-index="false">
+			<finder-column name="commandId" />
+			<finder-column name="productId" />
+			<finder-column name="actionType" />
+			<finder-column name="subscriberType" />
+			<finder-column name="actionName" />
+		</finder>
+	</entity>
+
+	<entity name="AppDomain" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="domainId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="type" db-name="TYPE" type="String" />
+		<column name="code" db-name="CODE" type="String" />
+		<column name="title" type="String" />
+		<column name="value" type="String" />
+		<column name="defaultValue" type="boolean" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="type" order-by="asc" />
+			<order-column name="code" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Type" return-type="Collection">
+			<finder-column name="type" />
+		</finder>
+		
+		<finder name="Code" return-type="AppDomain" unique="true">
+			<finder-column name="type" />
+			<finder-column name="code" />
+		</finder>
+	</entity>
+</service-builder>
