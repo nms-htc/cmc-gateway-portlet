@@ -4,5 +4,6 @@
 <display>
 	<category name="CTI Gateway">
 		<portlet id="gw-product"></portlet>
+		<portlet id="gw-provisioning"></portlet>
 	</category>
 </display>
