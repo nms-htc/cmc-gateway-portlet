@@ -14,7 +14,16 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import java.util.Date;
+
+import com.cmc.gateway.domain.NoSuchProductEntryException;
+import com.cmc.gateway.domain.model.ProductEntry;
 import com.cmc.gateway.domain.service.base.ProductEntryLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the product entry local service.
@@ -37,4 +46,38 @@ public class ProductEntryLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProductEntryLocalServiceUtil} to access the product entry local service.
 	 */
+	
+	public ProductEntry update(ProductEntry productEntry, ServiceContext serviceContext) throws PortalException, SystemException {
+		
+		Date now = new Date();
+		
+		if (Validator.isNull(productEntry.getProductId()) && productEntry.isNew()) {
+			long productId = counterLocalService.increment(ProductEntry.class.getName());
+			productEntry.setProductId(productId);
+			
+			productEntry.setUserId(serviceContext.getUserId());
+			productEntry.setGroupId(serviceContext.getScopeGroupId());
+			productEntry.setCompanyId(serviceContext.getCompanyId());
+			
+			productEntry.setCreateDate(now);
+			productEntry.setModifiedDate(now);
+		} else {
+			productEntry.setModifiedDate(now);	
+		}
+		
+		validate(productEntry);
+		
+		return productEntryPersistence.update(productEntry, true);
+	}
+	
+	public void validate(ProductEntry productEntry) throws PortalException, SystemException {
+		ValidateUtil.checkNull(productEntry.getTitle(), "title");
+		ValidateUtil.checkNull(productEntry.getCode(), "code");
+		try {
+			productEntryPersistence.findByCode(productEntry.getCode());
+			throw new PortalException("code-has-been-exist-on-the-system");
+		} catch (NoSuchProductEntryException e) {
+			// Happy
+		}
+	}
 }

@@ -14,7 +14,16 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import java.util.Date;
+
+import com.cmc.gateway.domain.NoSuchAppDomainException;
+import com.cmc.gateway.domain.model.AppDomain;
 import com.cmc.gateway.domain.service.base.AppDomainLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the app domain local service.
@@ -36,4 +45,40 @@ public class AppDomainLocalServiceImpl extends AppDomainLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.AppDomainLocalServiceUtil} to access the app domain local service.
 	 */
+	public AppDomain update(AppDomain appDomain, ServiceContext serviceContext) throws SystemException, PortalException {
+		
+		Date now = new Date();
+		
+		if (Validator.isNull(appDomain.getDomainId()) && appDomain.isNew()) {
+			long appDomainId = counterLocalService.increment(AppDomain.class.getName());
+			appDomain.setDomainId(appDomainId);
+			
+			appDomain.setCompanyId(serviceContext.getCompanyId());
+			appDomain.setGroupId(serviceContext.getScopeGroupId());
+			appDomain.setUserId(serviceContext.getUserId());
+			
+			appDomain.setCreateDate(now);
+			appDomain.setModifiedDate(now);
+		} else {
+			appDomain.setModifiedDate(now);
+		}
+		
+		validate(appDomain);
+		
+		return appDomainPersistence.update(appDomain, true);
+	}
+	
+	public void validate(AppDomain appDomain) throws PortalException, SystemException{
+		ValidateUtil.checkNull(appDomain.getCode(), "code");
+		ValidateUtil.checkNull(appDomain.getTitle(), "title");
+		ValidateUtil.checkNull(appDomain.getType(), "type");
+		
+		try {
+			appDomainPersistence.findByCode(appDomain.getType(), appDomain.getCode());
+			throw new PortalException("code-and-type-has-bean-exist-on-the-system");
+		} catch (NoSuchAppDomainException e) {
+			// everything is fine.
+		}
+	}
+	
 }

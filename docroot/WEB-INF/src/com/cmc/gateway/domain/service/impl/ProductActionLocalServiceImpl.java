@@ -14,7 +14,15 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import java.util.Date;
+
+import com.cmc.gateway.domain.model.ProductAction;
 import com.cmc.gateway.domain.service.base.ProductActionLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the product action local service.
@@ -37,4 +45,34 @@ public class ProductActionLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProductActionLocalServiceUtil} to access the product action local service.
 	 */
+	
+	public ProductAction update(ProductAction productAction, ServiceContext serviceContext) 
+		throws PortalException, SystemException {
+		
+		Date now = new Date();
+		
+		if (Validator.isNull(productAction.getActionId()) && productAction.isNew()) {
+			long actionId = counterLocalService.increment(ProductAction.class.getName());
+			productAction.setActionId(actionId);
+			
+			productAction.setUserId(serviceContext.getUserId());
+			productAction.setGroupId(serviceContext.getScopeGroupId());
+			productAction.setCompanyId(serviceContext.getCompanyId());
+			
+			productAction.setCreateDate(now);
+			productAction.setModifiedDate(now);
+		} else {
+			productAction.setModifiedDate(now);
+		}
+		
+		validate(productAction);
+		
+		return productActionPersistence.update(productAction, true);
+	}
+	
+	private void validate(ProductAction productAction) throws PortalException, SystemException {
+		ValidateUtil.checkNull(productAction.getActionType(), "action-type");
+		ValidateUtil.checkNull(productAction.getProductId(), "product");
+		ValidateUtil.checkNull(productAction.getCommandId(), "command-entry");
+	}
 }

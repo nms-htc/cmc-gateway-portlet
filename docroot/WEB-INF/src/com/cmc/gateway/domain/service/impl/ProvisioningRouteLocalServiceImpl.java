@@ -14,7 +14,13 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import com.cmc.gateway.domain.model.ProvisioningRoute;
 import com.cmc.gateway.domain.service.base.ProvisioningRouteLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the provisioning route local service.
@@ -37,4 +43,29 @@ public class ProvisioningRouteLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProvisioningRouteLocalServiceUtil} to access the provisioning route local service.
 	 */
+	
+	public ProvisioningRoute update(ProvisioningRoute provisioningRoute, ServiceContext serviceContext) throws PortalException, SystemException {
+		
+		if (Validator.isNull(provisioningRoute.getRouteId()) && provisioningRoute.isNew()) {
+			long routeId = counterLocalService.increment(ProvisioningRoute.class.getName());
+			provisioningRoute.setRouteId(routeId);
+			provisioningRoute.setUserId(serviceContext.getUserId());
+			provisioningRoute.setGroupId(serviceContext.getScopeGroupId());
+			provisioningRoute.setCompanyId(serviceContext.getCompanyId());
+			provisioningRoute.setCreateDate(serviceContext.getCreateDate());
+			provisioningRoute.setModifiedDate(serviceContext.getModifiedDate());
+		} else {
+			provisioningRoute.setModifiedDate(serviceContext.getModifiedDate());
+		}
+		
+		validate(provisioningRoute);
+		
+		return provisioningRoutePersistence.update(provisioningRoute, true);
+	}
+	
+	private void validate(ProvisioningRoute provisioningRoute) throws PortalException {
+		ValidateUtil.checkNull(provisioningRoute.getProvisioningId(), "provisioningId");
+		ValidateUtil.checkNull(provisioningRoute.getRouteKey(), "route-key");
+		ValidateUtil.checkNull(provisioningRoute.getRouteType(), "route-type");
+	}
 }

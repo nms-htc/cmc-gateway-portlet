@@ -115,7 +115,6 @@
 		<column name="channel" type="String" />
 		<column name="cause" type="String" />
 		<column name="languageId" type="String" />
-		<column name="campaignId" type="long" />
 
 		<column name="causeValue" type="int" />
 		<column name="content" type="String" />

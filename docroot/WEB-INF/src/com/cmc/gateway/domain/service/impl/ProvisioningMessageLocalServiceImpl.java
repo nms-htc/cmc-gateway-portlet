@@ -14,7 +14,13 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import com.cmc.gateway.domain.model.ProvisioningMessage;
 import com.cmc.gateway.domain.service.base.ProvisioningMessageLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the provisioning message local service.
@@ -37,4 +43,28 @@ public class ProvisioningMessageLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProvisioningMessageLocalServiceUtil} to access the provisioning message local service.
 	 */
+	
+	public ProvisioningMessage update(ProvisioningMessage provisioningMessage, ServiceContext serviceContext) throws PortalException, SystemException {
+		
+		if (Validator.isNull(provisioningMessage.getMessageId()) && provisioningMessage.isNew()) {
+			long messageId = counterLocalService.increment(ProvisioningMessage.class.getName());
+			provisioningMessage.setMessageId(messageId);
+			provisioningMessage.setUserId(serviceContext.getUserId());
+			provisioningMessage.setGroupId(serviceContext.getScopeGroupId());
+			provisioningMessage.setCompanyId(serviceContext.getCompanyId());
+			provisioningMessage.setCreateDate(serviceContext.getCreateDate());
+			provisioningMessage.setModifiedDate(serviceContext.getModifiedDate());
+		} else {
+			provisioningMessage.setModifiedDate(serviceContext.getModifiedDate());
+		}
+		
+		validate(provisioningMessage);
+		
+		return provisioningMessagePersistence.update(provisioningMessage, true);
+	}
+	
+	private void validate(ProvisioningMessage provisioningMessage) throws PortalException {
+		ValidateUtil.checkNull(provisioningMessage.getProvisioningId(), "provisioning");
+		ValidateUtil.checkNull(provisioningMessage.getResponseCode(), "response-code");
+	}
 }

@@ -14,7 +14,13 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import com.cmc.gateway.domain.model.ProductMessage;
 import com.cmc.gateway.domain.service.base.ProductMessageLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the product message local service.
@@ -37,4 +43,30 @@ public class ProductMessageLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProductMessageLocalServiceUtil} to access the product message local service.
 	 */
+	
+	public ProductMessage update(ProductMessage productMessage, ServiceContext context) throws SystemException, PortalException {
+		
+		if (Validator.isNull(productMessage.getMessageId()) && productMessage.isNew()) {
+			long messageId = counterLocalService.increment(ProductMessage.class.getName());
+			productMessage.setMessageId(messageId);
+			
+			productMessage.setUserId(context.getUserId());	
+			productMessage.setGroupId(context.getScopeGroupId());
+			productMessage.setCompanyId(context.getCompanyId());
+			productMessage.setCreateDate(context.getCreateDate());
+			productMessage.setModifiedDate(context.getModifiedDate());
+		} else {
+			productMessage.setModifiedDate(context.getModifiedDate());
+		}
+		
+		validate(productMessage);
+		
+		return productMessagePersistence.update(productMessage, true);
+	}
+	
+	private void validate(ProductMessage productMessage) throws PortalException {
+		ValidateUtil.checkNull(productMessage.getProductId(), "product");
+		ValidateUtil.checkNull(productMessage.getActionType(), "action-type");
+		ValidateUtil.checkNull(productMessage.getChannel(), "channel");
+	}
 }

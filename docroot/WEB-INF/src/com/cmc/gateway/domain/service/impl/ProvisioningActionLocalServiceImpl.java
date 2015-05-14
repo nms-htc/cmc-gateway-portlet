@@ -14,7 +14,13 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import com.cmc.gateway.domain.model.ProvisioningAction;
 import com.cmc.gateway.domain.service.base.ProvisioningActionLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the provisioning action local service.
@@ -37,4 +43,28 @@ public class ProvisioningActionLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProvisioningActionLocalServiceUtil} to access the provisioning action local service.
 	 */
+	
+	public ProvisioningAction update(ProvisioningAction provisioningAction, ServiceContext context) throws PortalException, SystemException {
+		
+		if (Validator.isNull(provisioningAction.getActionId()) && provisioningAction.isNew()) {
+			long actionId = counterLocalService.increment(ProvisioningAction.class.getName());
+			provisioningAction.setActionId(actionId);
+			provisioningAction.setUserId(context.getUserId());
+			provisioningAction.setGroupId(context.getScopeGroupId());
+			provisioningAction.setCompanyId(context.getCompanyId());
+			provisioningAction.setCreateDate(context.getCreateDate());
+			provisioningAction.setModifiedDate(context.getModifiedDate());
+		} else {
+			provisioningAction.setModifiedDate(context.getModifiedDate());
+		}
+		
+		validate(provisioningAction);
+		
+		return provisioningActionPersistence.update(provisioningAction, true);
+	}
+	
+	private void validate(ProvisioningAction provisioningAction) throws PortalException {
+		ValidateUtil.checkNull(provisioningAction.getProvisioningId(), "provisioning-entry");
+		ValidateUtil.checkNull(provisioningAction.getCommandId(), "command-entry");
+	}
 }

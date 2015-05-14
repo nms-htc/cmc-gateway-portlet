@@ -14,7 +14,13 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import com.cmc.gateway.domain.model.ProductRoute;
 import com.cmc.gateway.domain.service.base.ProductRouteLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the product route local service.
@@ -37,4 +43,31 @@ public class ProductRouteLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProductRouteLocalServiceUtil} to access the product route local service.
 	 */
+	
+	public ProductRoute update(ProductRoute productRoute, ServiceContext context) throws PortalException, SystemException {
+		
+		if (Validator.isNull(productRoute.getRouteId()) && productRoute.isNew()) {
+			long routeId = counterLocalService.increment(ProductRoute.class.getName());
+			productRoute.setRouteId(routeId);
+			
+			productRoute.setUserId(context.getUserId());
+			productRoute.setGroupId(context.getScopeGroupId());
+			productRoute.setCompanyId(context.getCompanyId());
+			productRoute.setCreateDate(context.getCreateDate());
+			productRoute.setModifiedDate(context.getModifiedDate());
+		} else {
+			productRoute.setModifiedDate(context.getModifiedDate());
+		}
+		
+		validate(productRoute);
+		
+		return productRoutePersistence.update(productRoute, true);
+	}
+	
+	private void validate(ProductRoute productRoute) throws PortalException, SystemException {
+		ValidateUtil.checkNull(productRoute.getProductId(), "product");
+		ValidateUtil.checkNull(productRoute.getChannel(), "channel");
+		ValidateUtil.checkNull(productRoute.getServiceAddress(), "service-address");
+		ValidateUtil.checkNull(productRoute.getKeyword(), "keyword");
+	}
 }

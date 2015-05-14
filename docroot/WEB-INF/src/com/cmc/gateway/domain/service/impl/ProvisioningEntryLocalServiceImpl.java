@@ -14,7 +14,14 @@
 
 package com.cmc.gateway.domain.service.impl;
 
+import com.cmc.gateway.domain.NoSuchProvisioningEntryException;
+import com.cmc.gateway.domain.model.ProvisioningEntry;
 import com.cmc.gateway.domain.service.base.ProvisioningEntryLocalServiceBaseImpl;
+import com.cmc.gateway.domain.util.ValidateUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the provisioning entry local service.
@@ -37,4 +44,34 @@ public class ProvisioningEntryLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.cmc.gateway.domain.service.ProvisioningEntryLocalServiceUtil} to access the provisioning entry local service.
 	 */
+	
+	public ProvisioningEntry update(ProvisioningEntry provisioningEntry, ServiceContext serviceContext) throws PortalException, SystemException {
+		
+		if (Validator.isNull(provisioningEntry.getProvisioningId()) && provisioningEntry.isNew()) {
+			long provisioningId = counterLocalService.increment(ProvisioningEntry.class.getName());
+			provisioningEntry.setProvisioningId(provisioningId);
+			provisioningEntry.setUserId(serviceContext.getUserId());
+			provisioningEntry.setGroupId(serviceContext.getScopeGroupId());
+			provisioningEntry.setCompanyId(serviceContext.getCompanyId());
+			provisioningEntry.setCreateDate(serviceContext.getCreateDate());
+			provisioningEntry.setModifiedDate(serviceContext.getModifiedDate());
+		} else {
+			provisioningEntry.setModifiedDate(serviceContext.getModifiedDate());
+		}
+		
+		validate(provisioningEntry);
+		
+		return provisioningEntryPersistence.update(provisioningEntry, true);
+	}
+	
+	private void validate(ProvisioningEntry provisioningEntry) throws PortalException, SystemException {
+		ValidateUtil.checkNull(provisioningEntry.getCode(), "code");
+		ValidateUtil.checkNull(provisioningEntry.getTitle(), "title");
+		try {
+			provisioningEntryPersistence.findByCode(provisioningEntry.getCode());
+			throw new PortalException("code-has-been-exist-in-the-system");
+		} catch (NoSuchProvisioningEntryException e) {
+			// GOOD
+		}
+	}
 }
