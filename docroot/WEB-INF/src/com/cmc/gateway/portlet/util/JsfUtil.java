@@ -164,9 +164,11 @@ public class JsfUtil {
 		}
 		
 		if (Validator.isNotNull(message)) {
-			context.addGlobalInfoMessage(message);
+			context.addGlobalErrorMessage(message);
+		} else {
+			context.addGlobalUnexpectedErrorMessage();
 		}
-		context.addGlobalUnexpectedErrorMessage();
+		
 	}
 	
 	public static ServiceContext getServiceContext() {
