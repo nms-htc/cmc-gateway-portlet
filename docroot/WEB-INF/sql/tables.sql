@@ -117,7 +117,6 @@ create table GW_ProductMessage (
 	channel VARCHAR(75) null,
 	cause VARCHAR(75) null,
 	languageId VARCHAR(75) null,
-	campaignId LONG,
 	causeValue INTEGER,
 	content STRING null,
 	description STRING null

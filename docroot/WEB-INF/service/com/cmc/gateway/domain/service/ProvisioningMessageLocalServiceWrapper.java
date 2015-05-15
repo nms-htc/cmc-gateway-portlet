@@ -273,6 +273,15 @@ public class ProvisioningMessageLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProvisioningMessage update(
+		com.cmc.gateway.domain.model.ProvisioningMessage provisioningMessage,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _provisioningMessageLocalService.update(provisioningMessage,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

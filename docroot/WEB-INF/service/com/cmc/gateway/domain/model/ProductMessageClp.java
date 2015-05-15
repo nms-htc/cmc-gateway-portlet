@@ -78,7 +78,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 		attributes.put("channel", getChannel());
 		attributes.put("cause", getCause());
 		attributes.put("languageId", getLanguageId());
-		attributes.put("campaignId", getCampaignId());
 		attributes.put("causeValue", getCauseValue());
 		attributes.put("content", getContent());
 		attributes.put("description", getDescription());
@@ -152,12 +151,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 
 		if (languageId != null) {
 			setLanguageId(languageId);
-		}
-
-		Long campaignId = (Long)attributes.get("campaignId");
-
-		if (campaignId != null) {
-			setCampaignId(campaignId);
 		}
 
 		Integer causeValue = (Integer)attributes.get("causeValue");
@@ -275,14 +268,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 		_languageId = languageId;
 	}
 
-	public long getCampaignId() {
-		return _campaignId;
-	}
-
-	public void setCampaignId(long campaignId) {
-		_campaignId = campaignId;
-	}
-
 	public int getCauseValue() {
 		return _causeValue;
 	}
@@ -347,7 +332,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 		clone.setChannel(getChannel());
 		clone.setCause(getCause());
 		clone.setLanguageId(getLanguageId());
-		clone.setCampaignId(getCampaignId());
 		clone.setCauseValue(getCauseValue());
 		clone.setContent(getContent());
 		clone.setDescription(getDescription());
@@ -407,7 +391,7 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{messageId=");
 		sb.append(getMessageId());
@@ -431,8 +415,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 		sb.append(getCause());
 		sb.append(", languageId=");
 		sb.append(getLanguageId());
-		sb.append(", campaignId=");
-		sb.append(getCampaignId());
 		sb.append(", causeValue=");
 		sb.append(getCauseValue());
 		sb.append(", content=");
@@ -445,7 +427,7 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.cmc.gateway.domain.model.ProductMessage");
@@ -496,10 +478,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 		sb.append(getLanguageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>campaignId</column-name><column-value><![CDATA[");
-		sb.append(getCampaignId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>causeValue</column-name><column-value><![CDATA[");
 		sb.append(getCauseValue());
 		sb.append("]]></column-value></column>");
@@ -529,7 +507,6 @@ public class ProductMessageClp extends BaseModelImpl<ProductMessage>
 	private String _channel;
 	private String _cause;
 	private String _languageId;
-	private long _campaignId;
 	private int _causeValue;
 	private String _content;
 	private String _description;

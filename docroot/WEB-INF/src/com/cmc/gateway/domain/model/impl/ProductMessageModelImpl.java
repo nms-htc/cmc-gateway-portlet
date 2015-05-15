@@ -77,12 +77,11 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 			{ "channel", Types.VARCHAR },
 			{ "cause", Types.VARCHAR },
 			{ "languageId", Types.VARCHAR },
-			{ "campaignId", Types.BIGINT },
 			{ "causeValue", Types.INTEGER },
 			{ "content", Types.VARCHAR },
 			{ "description", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table GW_ProductMessage (messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,productId LONG,actionType VARCHAR(75) null,channel VARCHAR(75) null,cause VARCHAR(75) null,languageId VARCHAR(75) null,campaignId LONG,causeValue INTEGER,content STRING null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table GW_ProductMessage (messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,productId LONG,actionType VARCHAR(75) null,channel VARCHAR(75) null,cause VARCHAR(75) null,languageId VARCHAR(75) null,causeValue INTEGER,content STRING null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table GW_ProductMessage";
 	public static final String ORDER_BY_JPQL = " ORDER BY productMessage.productId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY GW_ProductMessage.productId ASC";
@@ -126,7 +125,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 		model.setChannel(soapModel.getChannel());
 		model.setCause(soapModel.getCause());
 		model.setLanguageId(soapModel.getLanguageId());
-		model.setCampaignId(soapModel.getCampaignId());
 		model.setCauseValue(soapModel.getCauseValue());
 		model.setContent(soapModel.getContent());
 		model.setDescription(soapModel.getDescription());
@@ -199,7 +197,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 		attributes.put("channel", getChannel());
 		attributes.put("cause", getCause());
 		attributes.put("languageId", getLanguageId());
-		attributes.put("campaignId", getCampaignId());
 		attributes.put("causeValue", getCauseValue());
 		attributes.put("content", getContent());
 		attributes.put("description", getDescription());
@@ -273,12 +270,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 
 		if (languageId != null) {
 			setLanguageId(languageId);
-		}
-
-		Long campaignId = (Long)attributes.get("campaignId");
-
-		if (campaignId != null) {
-			setCampaignId(campaignId);
 		}
 
 		Integer causeValue = (Integer)attributes.get("causeValue");
@@ -460,15 +451,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 	}
 
 	@JSON
-	public long getCampaignId() {
-		return _campaignId;
-	}
-
-	public void setCampaignId(long campaignId) {
-		_campaignId = campaignId;
-	}
-
-	@JSON
 	public int getCauseValue() {
 		return _causeValue;
 	}
@@ -548,7 +530,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 		productMessageImpl.setChannel(getChannel());
 		productMessageImpl.setCause(getCause());
 		productMessageImpl.setLanguageId(getLanguageId());
-		productMessageImpl.setCampaignId(getCampaignId());
 		productMessageImpl.setCauseValue(getCauseValue());
 		productMessageImpl.setContent(getContent());
 		productMessageImpl.setDescription(getDescription());
@@ -687,8 +668,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 			productMessageCacheModel.languageId = null;
 		}
 
-		productMessageCacheModel.campaignId = getCampaignId();
-
 		productMessageCacheModel.causeValue = getCauseValue();
 
 		productMessageCacheModel.content = getContent();
@@ -712,7 +691,7 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{messageId=");
 		sb.append(getMessageId());
@@ -736,8 +715,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 		sb.append(getCause());
 		sb.append(", languageId=");
 		sb.append(getLanguageId());
-		sb.append(", campaignId=");
-		sb.append(getCampaignId());
 		sb.append(", causeValue=");
 		sb.append(getCauseValue());
 		sb.append(", content=");
@@ -750,7 +727,7 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.cmc.gateway.domain.model.ProductMessage");
@@ -801,10 +778,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 		sb.append(getLanguageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>campaignId</column-name><column-value><![CDATA[");
-		sb.append(getCampaignId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>causeValue</column-name><column-value><![CDATA[");
 		sb.append(getCauseValue());
 		sb.append("]]></column-value></column>");
@@ -842,7 +815,6 @@ public class ProductMessageModelImpl extends BaseModelImpl<ProductMessage>
 	private String _originalChannel;
 	private String _cause;
 	private String _languageId;
-	private long _campaignId;
 	private int _causeValue;
 	private String _content;
 	private String _description;

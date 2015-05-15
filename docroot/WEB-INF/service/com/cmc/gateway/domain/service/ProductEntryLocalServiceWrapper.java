@@ -268,6 +268,20 @@ public class ProductEntryLocalServiceWrapper implements ProductEntryLocalService
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProductEntry update(
+		com.cmc.gateway.domain.model.ProductEntry productEntry,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _productEntryLocalService.update(productEntry, serviceContext);
+	}
+
+	public void validate(com.cmc.gateway.domain.model.ProductEntry productEntry)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_productEntryLocalService.validate(productEntry);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

@@ -274,6 +274,40 @@ public class ProductCategoryLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.cmc.gateway.domain.model.ProductCategory update(
+		com.cmc.gateway.domain.model.ProductCategory productCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().update(productCategory, serviceContext);
+	}
+
+	public static com.cmc.gateway.domain.model.ProductCategory delete(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().delete(categoryId);
+	}
+
+	public static com.cmc.gateway.domain.model.ProductCategory delete(
+		com.cmc.gateway.domain.model.ProductCategory productCategory)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().delete(productCategory);
+	}
+
+	public static void validate(
+		com.cmc.gateway.domain.model.ProductCategory productCategory)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().validate(productCategory);
+	}
+
+	public static void validateDelete(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().validateDelete(categoryId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -270,6 +270,14 @@ public class ProductActionLocalServiceWrapper
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProductAction update(
+		com.cmc.gateway.domain.model.ProductAction productAction,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _productActionLocalService.update(productAction, serviceContext);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

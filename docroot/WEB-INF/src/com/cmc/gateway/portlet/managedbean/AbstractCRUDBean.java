@@ -1,11 +1,15 @@
 package com.cmc.gateway.portlet.managedbean;
 
+import java.util.List;
+
 import org.primefaces.model.LazyDataModel;
 
+import com.cmc.gateway.portlet.model.AbstractLazyDataModel;
 import com.cmc.gateway.portlet.util.JsfUtil;
-import com.cmc.gateway.portlet.util.MessageUtil;
+import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
@@ -34,15 +38,16 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	protected void beforePersist() {}
 	
 	public void persist() {
+		LiferayFacesContext context = LiferayFacesContext.getInstance();
 		try {
 			beforePersist();
 			addEntity(current);
-			current = null;
+			current = null; // reset current entity after persist
 			afterPersist();
-			MessageUtil.addGlobalInfoMessage(MessageUtil.REQUEST_SUCCESS_MESSAGE);
+			context.addGlobalSuccessInfoMessage();
 		} catch (Exception e) {
 			_LOGGER.error(e);
-			JsfUtil.handleException(e, MessageUtil.REQUEST_FAIL_MESSAGE);
+			JsfUtil.handleException(e);
 		}
 	}
 	
@@ -51,14 +56,15 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	protected void beforeUpdate() {}
 	
 	public void update() {
+		LiferayFacesContext context = LiferayFacesContext.getInstance();
 		try {
 			beforeUpdate();
 			current = updateEntity(current);
 			afterUpdate();
-			MessageUtil.addGlobalInfoMessage(MessageUtil.REQUEST_SUCCESS_MESSAGE);
+			context.addGlobalSuccessInfoMessage();
 		} catch (Exception e) {
 			_LOGGER.error(e);
-			JsfUtil.handleException(e, MessageUtil.REQUEST_FAIL_MESSAGE);
+			JsfUtil.handleException(e);
 		}
 	}
 	
@@ -67,14 +73,15 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	protected void beforeRemove(T entity) {}
 	
 	public void remove(T entity) {
+		LiferayFacesContext context = LiferayFacesContext.getInstance();
 		try {
 			beforeRemove(entity);
 			removeEntity(entity);
 			afterRemove(entity);
-			MessageUtil.addGlobalInfoMessage(MessageUtil.REQUEST_SUCCESS_MESSAGE);
+			context.addGlobalSuccessInfoMessage();
 		} catch (Exception e) {
 			_LOGGER.error(e);
-			JsfUtil.handleException(e, MessageUtil.REQUEST_FAIL_MESSAGE);
+			JsfUtil.handleException(e);
 		}
 	}
 	
@@ -103,9 +110,55 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	}
 	
 	protected abstract T initEntity();
-	protected abstract LazyDataModel<T> initDataModel();
+	protected LazyDataModel<T> initDataModel() {
+		AbstractLazyDataModel<T> model = new AbstractLazyDataModel<T>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected Class<T> getModelClass() {
+				return getEntityClass();
+			}
+
+			@Override
+			protected DynamicQuery getDynamicQuery() {
+				return createDymanicQuery();
+			}
+
+			@Override
+			protected List<T> query(DynamicQuery query, int start, int end)
+					throws SystemException, PortalException {
+				if (start >= 0 && end >= start) {
+					return queryEntities(query, start, end);
+				} else {
+					return queryEntities(query);
+				}
+			}
+
+			@Override
+			protected int count(DynamicQuery query) throws SystemException,
+					PortalException {
+				return count(query);
+			}
+
+			@Override
+			protected T findById(long id) throws SystemException,
+					PortalException {
+				return findById(id);
+			}
+		};
+		
+		model.setSearcher(getSearcher());
+				
+		return model;
+	}
 	protected abstract T addEntity(T entity) throws PortalException, SystemException;
 	protected abstract T updateEntity(T entity) throws PortalException, SystemException;
 	protected abstract void removeEntity(T entity) throws PortalException, SystemException;
-	
+	protected abstract T findById(long id) throws SystemException, PortalException;
+	protected abstract int count(DynamicQuery query) throws SystemException, PortalException;
+	protected abstract List<T> queryEntities(DynamicQuery query) throws SystemException, PortalException;
+	protected abstract List<T> queryEntities(DynamicQuery query, int start, int end) throws SystemException, PortalException;
+	protected abstract DynamicQuery createDymanicQuery();
+	protected abstract Class<T> getEntityClass();
+	protected abstract Searcher getSearcher();
 }

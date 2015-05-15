@@ -268,6 +268,14 @@ public class ProductRouteLocalServiceWrapper implements ProductRouteLocalService
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProductRoute update(
+		com.cmc.gateway.domain.model.ProductRoute productRoute,
+		com.liferay.portal.service.ServiceContext context)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _productRouteLocalService.update(productRoute, context);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

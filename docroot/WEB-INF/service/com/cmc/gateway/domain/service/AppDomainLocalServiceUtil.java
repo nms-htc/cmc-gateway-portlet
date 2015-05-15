@@ -273,6 +273,14 @@ public class AppDomainLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.cmc.gateway.domain.model.AppDomain update(
+		com.cmc.gateway.domain.model.AppDomain appDomain,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().update(appDomain, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

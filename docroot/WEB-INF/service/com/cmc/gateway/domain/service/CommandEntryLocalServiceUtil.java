@@ -273,6 +273,14 @@ public class CommandEntryLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.cmc.gateway.domain.model.CommandEntry update(
+		com.cmc.gateway.domain.model.CommandEntry commandEntry,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().update(commandEntry, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

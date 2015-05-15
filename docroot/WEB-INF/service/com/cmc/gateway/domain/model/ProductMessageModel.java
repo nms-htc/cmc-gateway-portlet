@@ -234,20 +234,6 @@ public interface ProductMessageModel extends BaseModel<ProductMessage> {
 	public void setLanguageId(String languageId);
 
 	/**
-	 * Returns the campaign ID of this product message.
-	 *
-	 * @return the campaign ID of this product message
-	 */
-	public long getCampaignId();
-
-	/**
-	 * Sets the campaign ID of this product message.
-	 *
-	 * @param campaignId the campaign ID of this product message
-	 */
-	public void setCampaignId(long campaignId);
-
-	/**
 	 * Returns the cause value of this product message.
 	 *
 	 * @return the cause value of this product message

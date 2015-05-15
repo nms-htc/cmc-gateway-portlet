@@ -247,4 +247,10 @@ public interface ProvisioningMessageLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.cmc.gateway.domain.model.ProvisioningMessage update(
+		com.cmc.gateway.domain.model.ProvisioningMessage provisioningMessage,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

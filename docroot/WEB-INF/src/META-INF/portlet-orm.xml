@@ -193,7 +193,6 @@
 			<basic name="channel" />
 			<basic name="cause" />
 			<basic name="languageId" />
-			<basic name="campaignId" />
 			<basic name="causeValue" />
 			<basic name="content" />
 			<basic name="description" />

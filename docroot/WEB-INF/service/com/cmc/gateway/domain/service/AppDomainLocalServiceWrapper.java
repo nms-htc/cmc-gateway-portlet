@@ -264,6 +264,14 @@ public class AppDomainLocalServiceWrapper implements AppDomainLocalService,
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.AppDomain update(
+		com.cmc.gateway.domain.model.AppDomain appDomain,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _appDomainLocalService.update(appDomain, serviceContext);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

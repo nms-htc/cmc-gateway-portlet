@@ -273,6 +273,21 @@ public class ProductEntryLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.cmc.gateway.domain.model.ProductEntry update(
+		com.cmc.gateway.domain.model.ProductEntry productEntry,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().update(productEntry, serviceContext);
+	}
+
+	public static void validate(
+		com.cmc.gateway.domain.model.ProductEntry productEntry)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().validate(productEntry);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

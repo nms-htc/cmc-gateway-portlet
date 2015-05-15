@@ -111,6 +111,33 @@ public class ProductCategoryLocalServiceClpInvoker {
 		_methodName105 = "setBeanIdentifier";
 
 		_methodParameterTypes105 = new String[] { "java.lang.String" };
+
+		_methodName110 = "update";
+
+		_methodParameterTypes110 = new String[] {
+				"com.cmc.gateway.domain.model.ProductCategory",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName111 = "delete";
+
+		_methodParameterTypes111 = new String[] { "long" };
+
+		_methodName112 = "delete";
+
+		_methodParameterTypes112 = new String[] {
+				"com.cmc.gateway.domain.model.ProductCategory"
+			};
+
+		_methodName113 = "validate";
+
+		_methodParameterTypes113 = new String[] {
+				"com.cmc.gateway.domain.model.ProductCategory"
+			};
+
+		_methodName114 = "validateDelete";
+
+		_methodParameterTypes114 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -212,6 +239,32 @@ public class ProductCategoryLocalServiceClpInvoker {
 			ProductCategoryLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
+			return ProductCategoryLocalServiceUtil.update((com.cmc.gateway.domain.model.ProductCategory)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
+			return ProductCategoryLocalServiceUtil.delete(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
+			return ProductCategoryLocalServiceUtil.delete((com.cmc.gateway.domain.model.ProductCategory)arguments[0]);
+		}
+
+		if (_methodName113.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
+			ProductCategoryLocalServiceUtil.validate((com.cmc.gateway.domain.model.ProductCategory)arguments[0]);
+		}
+
+		if (_methodName114.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes114, parameterTypes)) {
+			ProductCategoryLocalServiceUtil.validateDelete(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -251,4 +304,14 @@ public class ProductCategoryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes104;
 	private String _methodName105;
 	private String[] _methodParameterTypes105;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
+	private String _methodName111;
+	private String[] _methodParameterTypes111;
+	private String _methodName112;
+	private String[] _methodParameterTypes112;
+	private String _methodName113;
+	private String[] _methodParameterTypes113;
+	private String _methodName114;
+	private String[] _methodParameterTypes114;
 }

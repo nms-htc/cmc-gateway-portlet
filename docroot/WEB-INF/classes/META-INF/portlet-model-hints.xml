@@ -180,7 +180,6 @@
 			<hint name="max-width">75</hint>
 		</field>
 		<field name="languageId" type="String" />
-		<field name="campaignId" type="long" />
 		<field name="causeValue" type="int" />
 		<field name="content" type="String">
 			<hint-collection name="TEXTAREA" />

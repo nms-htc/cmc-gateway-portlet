@@ -112,6 +112,19 @@ public class ProductEntryLocalServiceClp implements ProductEntryLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "update";
+
+		_methodParameterTypes19 = new String[] {
+				"com.cmc.gateway.domain.model.ProductEntry",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName20 = "validate";
+
+		_methodParameterTypes20 = new String[] {
+				"com.cmc.gateway.domain.model.ProductEntry"
+			};
 	}
 
 	public com.cmc.gateway.domain.model.ProductEntry addProductEntry(
@@ -644,6 +657,74 @@ public class ProductEntryLocalServiceClp implements ProductEntryLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	public com.cmc.gateway.domain.model.ProductEntry update(
+		com.cmc.gateway.domain.model.ProductEntry productEntry,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						ClpSerializer.translateInput(productEntry),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.cmc.gateway.domain.model.ProductEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public void validate(com.cmc.gateway.domain.model.ProductEntry productEntry)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName20,
+				_methodParameterTypes20,
+				new Object[] { ClpSerializer.translateInput(productEntry) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -681,4 +762,8 @@ public class ProductEntryLocalServiceClp implements ProductEntryLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

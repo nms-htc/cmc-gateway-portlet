@@ -274,6 +274,14 @@ public class ProvisioningActionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.cmc.gateway.domain.model.ProvisioningAction update(
+		com.cmc.gateway.domain.model.ProvisioningAction provisioningAction,
+		com.liferay.portal.service.ServiceContext context)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().update(provisioningAction, context);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

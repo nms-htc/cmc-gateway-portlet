@@ -35,7 +35,7 @@ public class ProductMessageCacheModel implements CacheModel<ProductMessage>,
 	Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{messageId=");
 		sb.append(messageId);
@@ -59,8 +59,6 @@ public class ProductMessageCacheModel implements CacheModel<ProductMessage>,
 		sb.append(cause);
 		sb.append(", languageId=");
 		sb.append(languageId);
-		sb.append(", campaignId=");
-		sb.append(campaignId);
 		sb.append(", causeValue=");
 		sb.append(causeValue);
 		sb.append(", content=");
@@ -124,7 +122,6 @@ public class ProductMessageCacheModel implements CacheModel<ProductMessage>,
 			productMessageImpl.setLanguageId(languageId);
 		}
 
-		productMessageImpl.setCampaignId(campaignId);
 		productMessageImpl.setCauseValue(causeValue);
 
 		if (content == null) {
@@ -157,7 +154,6 @@ public class ProductMessageCacheModel implements CacheModel<ProductMessage>,
 	public String channel;
 	public String cause;
 	public String languageId;
-	public long campaignId;
 	public int causeValue;
 	public String content;
 	public String description;

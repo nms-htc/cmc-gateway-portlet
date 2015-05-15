@@ -268,6 +268,14 @@ public class CommandEntryLocalServiceWrapper implements CommandEntryLocalService
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.CommandEntry update(
+		com.cmc.gateway.domain.model.CommandEntry commandEntry,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _commandEntryLocalService.update(commandEntry, serviceContext);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

@@ -57,7 +57,6 @@ public class ProductMessageWrapper implements ProductMessage,
 		attributes.put("channel", getChannel());
 		attributes.put("cause", getCause());
 		attributes.put("languageId", getLanguageId());
-		attributes.put("campaignId", getCampaignId());
 		attributes.put("causeValue", getCauseValue());
 		attributes.put("content", getContent());
 		attributes.put("description", getDescription());
@@ -130,12 +129,6 @@ public class ProductMessageWrapper implements ProductMessage,
 
 		if (languageId != null) {
 			setLanguageId(languageId);
-		}
-
-		Long campaignId = (Long)attributes.get("campaignId");
-
-		if (campaignId != null) {
-			setCampaignId(campaignId);
 		}
 
 		Integer causeValue = (Integer)attributes.get("causeValue");
@@ -391,24 +384,6 @@ public class ProductMessageWrapper implements ProductMessage,
 	*/
 	public void setLanguageId(java.lang.String languageId) {
 		_productMessage.setLanguageId(languageId);
-	}
-
-	/**
-	* Returns the campaign ID of this product message.
-	*
-	* @return the campaign ID of this product message
-	*/
-	public long getCampaignId() {
-		return _productMessage.getCampaignId();
-	}
-
-	/**
-	* Sets the campaign ID of this product message.
-	*
-	* @param campaignId the campaign ID of this product message
-	*/
-	public void setCampaignId(long campaignId) {
-		_productMessage.setCampaignId(campaignId);
 	}
 
 	/**

@@ -111,6 +111,13 @@ public class ProductMessageLocalServiceClpInvoker {
 		_methodName105 = "setBeanIdentifier";
 
 		_methodParameterTypes105 = new String[] { "java.lang.String" };
+
+		_methodName110 = "update";
+
+		_methodParameterTypes110 = new String[] {
+				"com.cmc.gateway.domain.model.ProductMessage",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -212,6 +219,12 @@ public class ProductMessageLocalServiceClpInvoker {
 			ProductMessageLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
+			return ProductMessageLocalServiceUtil.update((com.cmc.gateway.domain.model.ProductMessage)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -251,4 +264,6 @@ public class ProductMessageLocalServiceClpInvoker {
 	private String[] _methodParameterTypes104;
 	private String _methodName105;
 	private String[] _methodParameterTypes105;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
 }

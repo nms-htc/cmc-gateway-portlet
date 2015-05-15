@@ -12,7 +12,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
+import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 
 /**
@@ -149,16 +152,26 @@ public class JsfUtil {
 		return "";
 	}
 
-	public static void handleException(Exception e, String defaultMessage) {
+	public static void handleException(Exception e) {
+		LiferayFacesContext context = LiferayFacesContext.getInstance();
+		String message = null;
 		if (e instanceof PortalException) {
-			MessageUtil.addGlobalErrorMessage(e);
+			message = e.getMessage();
+			
 		} else {
 			Throwable t = getRootCause(e);
-			if (t instanceof PortalException) {
-				MessageUtil.addGlobalErrorMessage(t);
-			} else {
-				MessageUtil.addGlobalErrorMessage(defaultMessage, t);
-			}
+			message = t.getMessage();
 		}
+		
+		if (Validator.isNotNull(message)) {
+			context.addGlobalInfoMessage(message);
+		}
+		context.addGlobalUnexpectedErrorMessage();
+	}
+	
+	public static ServiceContext getServiceContext() {
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		ServiceContext serviceContext = liferayFacesContext.getServiceContext();
+		return serviceContext;
 	}
 }

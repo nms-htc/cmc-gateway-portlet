@@ -246,4 +246,10 @@ public interface ProductRouteLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.cmc.gateway.domain.model.ProductRoute update(
+		com.cmc.gateway.domain.model.ProductRoute productRoute,
+		com.liferay.portal.service.ServiceContext context)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

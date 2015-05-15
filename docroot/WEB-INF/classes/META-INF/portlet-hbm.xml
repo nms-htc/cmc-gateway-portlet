@@ -148,7 +148,6 @@
 		<property name="channel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cause" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="languageId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="campaignId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="causeValue" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />

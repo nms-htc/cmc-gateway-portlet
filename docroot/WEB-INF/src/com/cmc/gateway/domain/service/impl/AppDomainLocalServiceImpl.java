@@ -68,7 +68,7 @@ public class AppDomainLocalServiceImpl extends AppDomainLocalServiceBaseImpl {
 		return appDomainPersistence.update(appDomain, true);
 	}
 	
-	public void validate(AppDomain appDomain) throws PortalException, SystemException{
+	private void validate(AppDomain appDomain) throws PortalException, SystemException{
 		ValidateUtil.checkNull(appDomain.getCode(), "code");
 		ValidateUtil.checkNull(appDomain.getTitle(), "title");
 		ValidateUtil.checkNull(appDomain.getType(), "type");

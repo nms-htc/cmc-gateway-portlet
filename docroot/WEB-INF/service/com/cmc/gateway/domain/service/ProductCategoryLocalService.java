@@ -247,4 +247,27 @@ public interface ProductCategoryLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.cmc.gateway.domain.model.ProductCategory update(
+		com.cmc.gateway.domain.model.ProductCategory productCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.cmc.gateway.domain.model.ProductCategory delete(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.cmc.gateway.domain.model.ProductCategory delete(
+		com.cmc.gateway.domain.model.ProductCategory productCategory)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void validate(
+		com.cmc.gateway.domain.model.ProductCategory productCategory)
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public void validateDelete(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

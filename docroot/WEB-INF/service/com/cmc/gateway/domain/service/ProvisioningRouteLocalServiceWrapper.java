@@ -272,6 +272,15 @@ public class ProvisioningRouteLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProvisioningRoute update(
+		com.cmc.gateway.domain.model.ProvisioningRoute provisioningRoute,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _provisioningRouteLocalService.update(provisioningRoute,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

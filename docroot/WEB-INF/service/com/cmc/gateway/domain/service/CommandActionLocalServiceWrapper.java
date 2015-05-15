@@ -270,6 +270,14 @@ public class CommandActionLocalServiceWrapper
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.CommandAction update(
+		com.cmc.gateway.domain.model.CommandAction commandAction,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _commandActionLocalService.update(commandAction, serviceContext);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

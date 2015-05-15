@@ -42,7 +42,6 @@ public class ProductMessageSoap implements Serializable {
 		soapModel.setChannel(model.getChannel());
 		soapModel.setCause(model.getCause());
 		soapModel.setLanguageId(model.getLanguageId());
-		soapModel.setCampaignId(model.getCampaignId());
 		soapModel.setCauseValue(model.getCauseValue());
 		soapModel.setContent(model.getContent());
 		soapModel.setDescription(model.getDescription());
@@ -186,14 +185,6 @@ public class ProductMessageSoap implements Serializable {
 		_languageId = languageId;
 	}
 
-	public long getCampaignId() {
-		return _campaignId;
-	}
-
-	public void setCampaignId(long campaignId) {
-		_campaignId = campaignId;
-	}
-
 	public int getCauseValue() {
 		return _causeValue;
 	}
@@ -229,7 +220,6 @@ public class ProductMessageSoap implements Serializable {
 	private String _channel;
 	private String _cause;
 	private String _languageId;
-	private long _campaignId;
 	private int _causeValue;
 	private String _content;
 	private String _description;

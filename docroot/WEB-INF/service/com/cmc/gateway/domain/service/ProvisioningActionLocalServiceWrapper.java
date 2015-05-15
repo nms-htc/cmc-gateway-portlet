@@ -272,6 +272,15 @@ public class ProvisioningActionLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProvisioningAction update(
+		com.cmc.gateway.domain.model.ProvisioningAction provisioningAction,
+		com.liferay.portal.service.ServiceContext context)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _provisioningActionLocalService.update(provisioningAction,
+			context);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

@@ -441,7 +441,6 @@ public class ProductMessagePersistenceImpl extends BasePersistenceImpl<ProductMe
 		productMessageImpl.setChannel(productMessage.getChannel());
 		productMessageImpl.setCause(productMessage.getCause());
 		productMessageImpl.setLanguageId(productMessage.getLanguageId());
-		productMessageImpl.setCampaignId(productMessage.getCampaignId());
 		productMessageImpl.setCauseValue(productMessage.getCauseValue());
 		productMessageImpl.setContent(productMessage.getContent());
 		productMessageImpl.setDescription(productMessage.getDescription());

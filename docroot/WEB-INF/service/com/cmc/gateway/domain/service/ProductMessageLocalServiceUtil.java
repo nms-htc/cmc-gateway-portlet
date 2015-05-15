@@ -274,6 +274,14 @@ public class ProductMessageLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.cmc.gateway.domain.model.ProductMessage update(
+		com.cmc.gateway.domain.model.ProductMessage productMessage,
+		com.liferay.portal.service.ServiceContext context)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().update(productMessage, context);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

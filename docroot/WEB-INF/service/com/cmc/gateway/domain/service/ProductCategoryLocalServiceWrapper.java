@@ -272,6 +272,40 @@ public class ProductCategoryLocalServiceWrapper
 			arguments);
 	}
 
+	public com.cmc.gateway.domain.model.ProductCategory update(
+		com.cmc.gateway.domain.model.ProductCategory productCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _productCategoryLocalService.update(productCategory,
+			serviceContext);
+	}
+
+	public com.cmc.gateway.domain.model.ProductCategory delete(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _productCategoryLocalService.delete(categoryId);
+	}
+
+	public com.cmc.gateway.domain.model.ProductCategory delete(
+		com.cmc.gateway.domain.model.ProductCategory productCategory)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _productCategoryLocalService.delete(productCategory);
+	}
+
+	public void validate(
+		com.cmc.gateway.domain.model.ProductCategory productCategory)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_productCategoryLocalService.validate(productCategory);
+	}
+
+	public void validateDelete(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_productCategoryLocalService.validateDelete(categoryId);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */
