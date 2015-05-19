@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 import com.cmc.gateway.domain.model.ProductEntry;
 import com.cmc.gateway.domain.service.ProductEntryLocalServiceUtil;
@@ -21,9 +22,10 @@ public class ProductEntryBean extends AbstractCRUDBean<ProductEntry> implements
 		Serializable {
 
 	private static final long serialVersionUID = 3386261638355281972L;
-	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory
 			.getLogger(ProductEntryBean.class);
+	
+	private SelectItem[] items;
 
 	@Override
 	protected ProductEntry initEntity() {
@@ -91,6 +93,23 @@ public class ProductEntryBean extends AbstractCRUDBean<ProductEntry> implements
 	@Override
 	protected Searcher getSearcher() {
 		return null;
+	}
+	
+	public SelectItem[] getItems() {
+		if (items == null) {
+			try {
+				List<ProductEntry> products = queryEntities(createDymanicQuery());
+				items = new SelectItem[products.size()];
+				for (int i = 0; i < products.size(); i++) {
+					ProductEntry product = products.get(i);
+					items[i] = new SelectItem(product.getProductId(), product.getTitle());
+					logger.info("Product: id = {0}, title = {1}", product.getProductId(), product.getTitle());
+				}
+			} catch (Exception e) {
+				logger.warn("Cannot create select items of product. Error: {0}", e.getMessage());
+			}
+		}
+		return items;
 	}
 
 }

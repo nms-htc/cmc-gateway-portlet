@@ -11,126 +11,173 @@
 			<p:messages globalOnly="true" closable="true" />
 
 			<h3>
-				<h:outputText value="${i18n['create-new-product-entry']}"
-					rendered="${productEntryBean.current.productId == 0}" />
-				<h:outputText value="${i18n['update-product-entry']}"
-					rendered="${productEntryBean.current.productId != 0}" />
+				<h:outputText value="${i18n['add-new-product-route']}"
+					rendered="${productRouteBean.current.routeId == 0}" />
+				<h:outputText value="${i18n['update-product-route']}"
+					rendered="${productRouteBean.current.routeId != 0}" />
 			</h3>
 
-			<p:panel header="${i18n['basic']}">
-				<h:panelGrid columns="3" styleClass="panel-grid-form"
-					columnClasses="form-label">
+			<p:panel header="#{i18n['basic']}">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<h:panelGrid columns="3" styleClass="panel-grid-form"
+								columnClasses="form-label">
 
-					<p:outputLabel value="${i18n['code']}" for="code" />
-					<p:inputText id="code" size="30"
-						value="#{productEntryBean.current.code}" required="true" />
-					<p:message for="code" />
+								<p:outputLabel value="${i18n['channel']}" for="channel" />
+								<p:selectOneMenu id="channel"
+									value="#{productRouteBean.current.channel}">
+									<f:selectItems
+										value="#{appDomainBean.getStringItems('CHANNEL')}" />
+								</p:selectOneMenu>
+								<p:message for="channel" />
 
-					<p:outputLabel value="${i18n['title']}" for="title" />
-					<p:inputText id="title" size="30"
-						value="#{productEntryBean.current.title}" required="true" />
-					<p:message for="title" />
+								<p:outputLabel value="${i18n['service-address']}"
+									for="serviceAddress" />
+								<p:inputText id="serviceAddress" size="30"
+									value="#{productRouteBean.current.serviceAddress}"
+									required="true" />
+								<p:message for="serviceAddress" />
 
-					<p:outputLabel value="${i18n['type']}" for="type" />
-					<p:selectOneMenu id="type"
-						value="#{productEntryBean.current.productType}">
-						<f:selectItems
-							value="#{appDomainBean.getStringItems('PRODUCT_TYPE')}" />
-					</p:selectOneMenu>
-					<p:message for="type" />
+								<p:outputLabel value="${i18n['keyword']}" for="keyword" />
+								<p:inputText id="keyword" size="30"
+									value="#{productRouteBean.current.keyword}" required="true" />
+								<p:message for="keyword" />
 
-					<p:outputLabel value="${i18n['category']}" for="category" />
-					<p:selectOneMenu id="category"
-						value="#{productEntryBean.current.categoryId}">
-						<f:selectItems value="#{productCategoryBean.items}" />
-					</p:selectOneMenu>
-					<p:message for="category" />
+								<p:outputLabel value="${i18n['open-time']}" for="openTime" />
+								<p:inputText id="openTime" size="30"
+									value="#{productRouteBean.current.openTime}" />
+								<p:message for="openTime" />
 
-					<p:outputLabel value="${i18n['sku']}" for="sku" />
-					<p:inputText id="sku" size="30"
-						value="#{productEntryBean.current.sku}" />
-					<p:message for="sku" />
+								<p:outputLabel value="${i18n['closed-time']}" for="closedTime" />
+								<p:inputText id="closedTime" size="30"
+									value="#{productRouteBean.current.closedTime}" />
+								<p:message for="closedTime" />
 
-					<p:outputLabel value="${i18n['price']}" for="price" />
-					<p:inputText id="price" size="30"
-						value="#{productEntryBean.current.price}" />
-					<p:message for="price" />
+								<p:outputLabel value="${i18n['start-date']}" for="startDate" />
+								<p:calendar id="startDate"
+									value="#{productRouteBean.current.startDate}"
+									pattern="dd/MM/yyyy" mask="true" showOn="button" />
+								<p:message for="startDate" />
 
-					<p:outputLabel value="${i18n['status']}" for="status" />
-					<p:selectOneMenu id="status"
-						value="#{productEntryBean.current.status}">
-						<f:selectItems
-							value="#{appDomainBean.getStringItems('PRODUCT_STATUS')}" />
-					</p:selectOneMenu>
-					<p:message for="status" />
+								<p:outputLabel value="${i18n['expiration-date']}"
+									for="expirationDate" />
+								<p:calendar id="expirationDate"
+									value="#{productRouteBean.current.expirationDate}"
+									pattern="dd/MM/yyyy" mask="true" showOn="button" />
+								<p:message for="expirationDate" />
 
-					<p:outputLabel value="${i18n['description']}" for="description" />
-					<p:inputTextarea id="description"
-						value="#{productEntryBean.current.description}" cols="30" />
-					<p:message for="description" />
+								<p:outputLabel value="${i18n['status']}" for="status" />
+								<p:selectOneMenu id="status"
+									value="#{productRouteBean.current.status}">
+									<f:selectItems
+										value="#{appDomainBean.getStringItems('PRODUCT_STATUS')}" />
+								</p:selectOneMenu>
+								<p:message for="status" />
 
+								<p:outputLabel value="${i18n['description']}" for="description" />
+								<p:inputTextarea id="description"
+									value="#{productRouteBean.current.description}" cols="30" />
+								<p:message for="description" />
+							</h:panelGrid>
+						</div>
 
-				</h:panelGrid>
+						<div class="ui-grid-col-6">
+							<h:panelGrid columns="3" styleClass="panel-grid-form"
+								columnClasses="form-label">
 
-				<f:facet name="footer">
+								<p:outputLabel for="productId" value="#{i18n['product']}" />
+								<p:selectOneMenu id="productId"
+									value="#{productRouteBean.current.productId}">
+									<f:selectItems value="#{productEntryBean.items}" />
+								</p:selectOneMenu>
+								<p:message for="productId" />
 
-				</f:facet>
+								<p:outputLabel value="${i18n['action-type']}" for="actionType" />
+								<p:selectOneMenu id="actionType"
+									value="#{productRouteBean.current.actionType}">
+									<f:selectItems
+										value="#{appDomainBean.getStringItems('ACTION_TYPE')}" />
+								</p:selectOneMenu>
+								<p:message for="actionType" />
+
+								<p:outputLabel for="duplicateScan"
+									value="${i18n['duplicate-scan']}" />
+								<p:inputText id="duplicateScan"
+									value="#{productRouteBean.current.duplicateScan}" size="30" />
+								<p:message for="duplicateScan" />
+
+								<p:outputLabel for="maxRegisterDaily"
+									value="${i18n['max-register-dayly']}" />
+								<p:inputText id="maxRegisterDaily"
+									value="#{productRouteBean.current.maxRegisterDaily}" size="30" />
+								<p:message for="maxRegisterDaily" />
+
+								<p:outputLabel for="queueName" value="${i18n['queue-name']}" />
+								<p:inputText id="queueName"
+									value="#{productRouteBean.current.queueName}" size="30" />
+								<p:message for="queueName" />
+
+								<p:outputLabel for="processClass"
+									value="${i18n['process-class']}" />
+								<p:inputText id="processClass"
+									value="#{productRouteBean.current.processClass}" size="30" />
+								<p:message for="processClass" />
+
+								<p:outputLabel for="processMethod"
+									value="${i18n['process-method']}" />
+								<p:inputText id="processMethod"
+									value="#{productRouteBean.current.processMethod}" size="30" />
+								<p:message for="processMethod" />
+
+								<p:outputLabel for="timeout" value="${i18n['timeout']}" />
+								<p:inputText id="timeout"
+									value="#{productRouteBean.current.timeout}" size="30" />
+								<p:message for="timeout" />
+
+							</h:panelGrid>
+						</div>
+					</div>
+				</div>
+
 			</p:panel>
 
 			<br />
 
 			<p:panel header="${i18n['advanced']}">
 
-				<h:panelGrid columns="3" styleClass="panel-grid-form"
-					columnClasses="form-label">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-6">
+							<h:panelGrid columns="2" styleClass="panel-grid-form"
+								columnClasses="form-label">
+								<p:outputLabel for="synchronous" value="#{i18n['synchronous']}" />
+								<p:selectBooleanCheckbox id="synchronous"
+									value="#{productRouteBean.current.synchronous}" />
 
-					<p:outputLabel value="${i18n['subscriber-types']}"
-						for="subscriberTypes" />
-					<p:selectOneMenu id="subscriberTypes"
-						value="#{productEntryBean.current.subscriberTypes}">
-						<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIBER_TYPE')}" />
-					</p:selectOneMenu>
-					<p:message for="subscriberTypes" />
-					
-					<p:outputLabel value="${i18n['term-of-use']}" for="termOfUse"/>
-					<p:selectBooleanCheckbox id="termOfUse" value="#{productEntryBean.current.termOfUse}"/>
-					<p:message for="termOfUse"/>
-					
-					<p:outputLabel value="${i18n['term-period']}" for="termPeriod"/>
-					<p:inputText id="termPeriod" value="#{productEntryBean.current.termPeriod}"/>
-					<p:message for="termPeriod"/>
-					
-					<p:outputLabel value="${i18n['term-unit']}" for="termUnit" />
-					<p:selectOneMenu id="termUnit" value="#{productEntryBean.current.termUnit}">
-						<f:selectItems value="#{appDomainBean.getStringItems('TERM_UNIT')}" />
-					</p:selectOneMenu>
-					<p:message for="termUnit" />
-					
-					<p:outputLabel value="${i18n['subscription']}" for="subscription"/>
-					<p:selectBooleanCheckbox id="subscription" value="#{productEntryBean.current.subscription}"/>
-					<p:message for="subscription"/>
-					
-					<p:outputLabel value="${i18n['subscription-period']}" for="subscriptionPeriod"/>
-					<p:inputText id="subscriptionPeriod" value="#{productEntryBean.current.subscriptionPeriod}"/>
-					<p:message for="subscriptionPeriod"/>
-					
-					<p:outputLabel value="${i18n['subscription-unit']}" for="subscriptionUnit" />
-					<p:selectOneMenu id="subscriptionUnit" value="#{productEntryBean.current.subscriptionUnit}">
-						<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIPTION_UNIT')}" />
-					</p:selectOneMenu>
-					<p:message for="subscriptionUnit" />
-					
-					<p:outputLabel value="${i18n['grace-period']}" for="gracePeriod"/>
-					<p:inputText id="gracePeriod" value="#{productEntryBean.current.gracePeriod}"/>
-					<p:message for="gracePeriod"/>
-					
-					<p:outputLabel value="${i18n['grace-unit']}" for="graceUnit" />
-					<p:selectOneMenu id="graceUnit" value="#{productEntryBean.current.graceUnit}">
-						<f:selectItems value="#{appDomainBean.getStringItems('GRACE_UNIT')}" />
-					</p:selectOneMenu>
-					<p:message for="graceUnit" />
-					
-				</h:panelGrid>
+								<p:outputLabel for="createOrder" value="#{i18n['create-order']}" />
+								<p:selectBooleanCheckbox id="createOrder"
+									value="#{productRouteBean.current.createOrder}" />
+
+							</h:panelGrid>
+						</div>
+
+						<div class="ui-grid-col-6">
+							<h:panelGrid columns="2" styleClass="panel-grid-form"
+								columnClasses="form-label">
+
+								<p:outputLabel for="notifyOwner" value="#{i18n['notify-owner']}" />
+								<p:selectBooleanCheckbox id="notifyOwner"
+									value="#{productRouteBean.current.notifyOwner}" />
+
+								<p:outputLabel for="notifyDeliver" value="#{i18n['notify-deliver']}" />
+								<p:selectBooleanCheckbox id="notifyDeliver"
+									value="#{productRouteBean.current.notifyDeliver}" />
+
+							</h:panelGrid>
+						</div>
+					</div>
+				</div>
 
 			</p:panel>
 
@@ -138,16 +185,16 @@
 
 			<p:commandButton id="persistBtn" value="${i18n['save']}"
 				icon="ui-icon-disk" update="@form"
-				actionListener="#{productEntryBean.persist()}" validateClient="true"
-				rendered="#{productEntryBean.current.productId == 0}" />
+				actionListener="#{productRouteBean.persist()}" validateClient="true"
+				rendered="#{productRouteBean.current.routeId == 0}" />
 
 			<p:commandButton id="updateBtn" value="${i18n['update']}"
 				icon="ui-icon-disk" update="@form"
-				actionListener="#{productEntryBean.update()}" validateClient="true"
-				rendered="#{productEntryBean.current.productId != 0}" />
+				actionListener="#{productRouteBean.update()}" validateClient="true"
+				rendered="#{productRouteBean.current.routeId != 0}" />
 
 			<p:button id="cancelBtn" value="${i18n['cancel']}"
-				icon="ui-icon-cancel" outcome="list_product" />
+				icon="ui-icon-cancel" outcome="list_route" />
 		</h:form>
 	</ui:define>
 </ui:composition>
