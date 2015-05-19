@@ -9,7 +9,7 @@
 		</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/gw-product/view.xhtml</value>
+			<value>/views/gw-product/list_product.xhtml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -73,7 +73,7 @@
 		</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/gw-config/view.xhtml</value>
+			<value>/views/gw-config/list_appdomain.xhtml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

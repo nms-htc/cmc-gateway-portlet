@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:tabMenu activeIndex="${t}">
+		<p:menuitem outcome="/views/gw-product/list_category.xhtml" value="${i18n['product-category']}">
+			<f:param name="t" value="0"/>
+		</p:menuitem>
+		
+		<p:menuitem outcome="/views/gw-product/list_product.xhtml" value="${i18n['product']}">
+			<f:param name="t" value="1"/>
+		</p:menuitem>
+		
+		<p:menuitem outcome="/views/gw-product/list_route.xhtml" value="${i18n['route']}">
+			<f:param name="t" value="2"/>
+		</p:menuitem>
+		
+		<p:menuitem outcome="/views/gw-product/list_action.xhtml" value="${i18n['action']}">
+			<f:param name="t" value="3"/>
+		</p:menuitem>
+		
+		<p:menuitem outcome="/views/gw-product/list_message.xhtml" value="${i18n['message']}">
+			<f:param name="t" value="4"/>
+		</p:menuitem>
+	</p:tabMenu>
+</ui:component>

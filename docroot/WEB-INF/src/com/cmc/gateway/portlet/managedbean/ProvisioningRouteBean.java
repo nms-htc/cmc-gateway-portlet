@@ -53,7 +53,7 @@ public class ProvisioningRouteBean extends AbstractCRUDBean<ProvisioningRoute> i
 	}
 
 	@Override
-	protected int count(DynamicQuery query) throws SystemException,
+	protected int countEntities(DynamicQuery query) throws SystemException,
 			PortalException {
 		return Long.valueOf(ProvisioningRouteLocalServiceUtil.dynamicQueryCount(query)).intValue();
 	}

@@ -61,6 +61,14 @@ public class ProductEntryLocalServiceImpl
 			
 			productEntry.setCreateDate(now);
 			productEntry.setModifiedDate(now);
+			
+			try {
+				productEntryPersistence.findByCode(productEntry.getCode());
+				throw new PortalException("code-has-been-exist-on-the-system");
+			} catch (NoSuchProductEntryException e) {
+				// Happy
+			}
+			
 		} else {
 			productEntry.setModifiedDate(now);	
 		}
@@ -73,11 +81,5 @@ public class ProductEntryLocalServiceImpl
 	public void validate(ProductEntry productEntry) throws PortalException, SystemException {
 		ValidateUtil.checkNull(productEntry.getTitle(), "title");
 		ValidateUtil.checkNull(productEntry.getCode(), "code");
-		try {
-			productEntryPersistence.findByCode(productEntry.getCode());
-			throw new PortalException("code-has-been-exist-on-the-system");
-		} catch (NoSuchProductEntryException e) {
-			// Happy
-		}
 	}
 }

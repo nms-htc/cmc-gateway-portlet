@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 import com.cmc.gateway.domain.model.ProductCategory;
 import com.cmc.gateway.domain.service.ProductCategoryLocalServiceUtil;
@@ -20,8 +21,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 public class ProductCategoryBean extends AbstractCRUDBean<ProductCategory> implements Serializable {
 
 	private static final long serialVersionUID = -2336597554994830653L;
-	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(ProductCategoryBean.class);
+	
+	private SelectItem[] items;
 
 	@Override
 	protected ProductCategory initEntity() {
@@ -53,7 +55,7 @@ public class ProductCategoryBean extends AbstractCRUDBean<ProductCategory> imple
 	}
 
 	@Override
-	protected int count(DynamicQuery query) throws SystemException,
+	protected int countEntities(DynamicQuery query) throws SystemException,
 			PortalException {
 		return Long.valueOf(ProductCategoryLocalServiceUtil.dynamicQueryCount(query)).intValue();
 	}
@@ -85,6 +87,24 @@ public class ProductCategoryBean extends AbstractCRUDBean<ProductCategory> imple
 	@Override
 	protected Searcher getSearcher() {
 		return null;
+	}
+	
+	public SelectItem[] getItems() {
+		if (items == null) {
+			try {
+				List<ProductCategory> categories = queryEntities(createDymanicQuery());
+				items = new SelectItem[categories.size()];
+				
+				for (int i = 0; i < categories.size(); i++) {
+					ProductCategory category = categories.get(i);
+					items[i] = new SelectItem(category.getCategoryId(), category.getTitle());
+				}
+			} catch (Exception e) {
+				logger.warn("Error when build product category select item. Error: {0}", e.getMessage());
+			}
+		}
+		
+		return items;
 	}
 
 }

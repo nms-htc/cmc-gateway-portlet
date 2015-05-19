@@ -53,7 +53,7 @@ public class ProductMessageBean extends AbstractCRUDBean<ProductMessage> impleme
 	}
 
 	@Override
-	protected int count(DynamicQuery query) throws SystemException,
+	protected int countEntities(DynamicQuery query) throws SystemException,
 			PortalException {
 		return Long.valueOf(ProductMessageLocalServiceUtil.dynamicQueryCount(query)).intValue();
 	}

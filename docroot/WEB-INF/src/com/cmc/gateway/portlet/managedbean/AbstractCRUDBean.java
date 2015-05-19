@@ -2,6 +2,9 @@ package com.cmc.gateway.portlet.managedbean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.model.SelectItem;
+
 import org.primefaces.model.LazyDataModel;
 
 import com.cmc.gateway.portlet.model.AbstractLazyDataModel;
@@ -12,6 +15,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
 public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
@@ -20,6 +24,7 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	 * Logger
 	 */
 	private static final Logger _LOGGER = LoggerFactory.getLogger(AbstractCRUDBean.class);
+	public static final String PARAM_ENTITY_KEY = "entityId";
 	
 	/**
 	 *  Current entity to process
@@ -30,6 +35,19 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	 */
 	protected LazyDataModel<T> lazyDataModel;
 	
+	@PostConstruct
+	public void init() {
+		LiferayFacesContext content = LiferayFacesContext.getInstance();
+		long entityId = content.getRequestParameterAsLong(PARAM_ENTITY_KEY, 0);
+		if (Validator.isNotNull(entityId)) {
+			try {
+				current = findById(entityId);
+			} catch (Exception e) {
+				
+			}
+			
+		}
+	}
 	
 	// Bussiness method
 	
@@ -137,7 +155,7 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 			@Override
 			protected int count(DynamicQuery query) throws SystemException,
 					PortalException {
-				return count(query);
+				return countEntities(query);
 			}
 
 			@Override
@@ -155,7 +173,7 @@ public abstract class AbstractCRUDBean<T extends BaseModel<T>> {
 	protected abstract T updateEntity(T entity) throws PortalException, SystemException;
 	protected abstract void removeEntity(T entity) throws PortalException, SystemException;
 	protected abstract T findById(long id) throws SystemException, PortalException;
-	protected abstract int count(DynamicQuery query) throws SystemException, PortalException;
+	protected abstract int countEntities(DynamicQuery query) throws SystemException, PortalException;
 	protected abstract List<T> queryEntities(DynamicQuery query) throws SystemException, PortalException;
 	protected abstract List<T> queryEntities(DynamicQuery query, int start, int end) throws SystemException, PortalException;
 	protected abstract DynamicQuery createDymanicQuery();

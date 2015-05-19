@@ -53,7 +53,7 @@ public class CommandEntryBean extends AbstractCRUDBean<CommandEntry> implements 
 	}
 
 	@Override
-	protected int count(DynamicQuery query) throws SystemException,
+	protected int countEntities(DynamicQuery query) throws SystemException,
 			PortalException {
 		return Long.valueOf(CommandEntryLocalServiceUtil.dynamicQueryCount(query)).intValue();
 	}

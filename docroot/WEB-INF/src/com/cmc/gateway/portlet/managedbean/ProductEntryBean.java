@@ -57,7 +57,7 @@ public class ProductEntryBean extends AbstractCRUDBean<ProductEntry> implements
 	}
 
 	@Override
-	protected int count(DynamicQuery query) throws SystemException,
+	protected int countEntities(DynamicQuery query) throws SystemException,
 			PortalException {
 		return Long.valueOf(
 				ProductEntryLocalServiceUtil.dynamicQueryCount(query))

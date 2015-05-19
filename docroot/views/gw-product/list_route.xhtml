@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			<p:messages globalOnly="true" closable="true"/>
+			<ui:include src="/views/gw-product/tab_nav.xhtml" >
+				<ui:param name="t" value="2"/>
+			</ui:include>
+			<br />
+			<p:commandButton icon="ui-icon-plus" action="edit_route"
+				value="${i18n['add']}" ajax="false" />
+			<hr />
+
+			<p:dataTable id="listTable" widgetVar="listTable"
+				value="#{productRouteBean.lazyDataModel}" var="route"
+				rowIndexVar="index" rows="10" paginator="true"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
+				lazy="true">
+
+				<p:column headerText="#" width="40">
+					<h:outputText value="#{index + 1}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['channel']}" filterBy="#{route.channel}"
+					sortBy="#{route.channel}">
+					<h:outputText value="${route.channel}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['service-address']}" filterBy="#{route.serviceAddress}"
+					sortBy="#{route.serviceAddress}">
+					<h:outputText value="${route.serviceAddress}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['keyword']}" filterBy="#{route.routekeyword}"
+					sortBy="#{route.routekeyword}">
+					<h:outputText value="${route.routekeyword}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['open-time']}"
+					filterBy="#{route.openTime}" sortBy="#{route.openTime}">
+					<h:outputText value="${route.openTime}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="#{i18n['closed-time']}"
+					filterBy="#{route.closedTime}" sortBy="#{route.closedTime}">
+					<h:outputText value="${route.closedTime}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="#{i18n['status']}"
+					sortBy="#{route.status}">
+					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_ROUTE_STATUS', route.status)}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['action']}" width="60">
+					<p:button outcome="edit_route" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{route.productId}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productRouteBean.remove(route)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-route-message']}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

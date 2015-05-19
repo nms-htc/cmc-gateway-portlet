@@ -15,6 +15,7 @@
 package com.cmc.gateway.domain.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import com.cmc.gateway.domain.NoSuchAppDomainException;
 import com.cmc.gateway.domain.model.AppDomain;
@@ -59,6 +60,13 @@ public class AppDomainLocalServiceImpl extends AppDomainLocalServiceBaseImpl {
 			
 			appDomain.setCreateDate(now);
 			appDomain.setModifiedDate(now);
+			
+			try {
+				appDomainPersistence.findByCode(appDomain.getType(), appDomain.getCode());
+				throw new PortalException("code-and-type-has-bean-exist-on-the-system");
+			} catch (NoSuchAppDomainException e) {
+				// everything is fine.
+			}
 		} else {
 			appDomain.setModifiedDate(now);
 		}
@@ -72,13 +80,14 @@ public class AppDomainLocalServiceImpl extends AppDomainLocalServiceBaseImpl {
 		ValidateUtil.checkNull(appDomain.getCode(), "code");
 		ValidateUtil.checkNull(appDomain.getTitle(), "title");
 		ValidateUtil.checkNull(appDomain.getType(), "type");
-		
-		try {
-			appDomainPersistence.findByCode(appDomain.getType(), appDomain.getCode());
-			throw new PortalException("code-and-type-has-bean-exist-on-the-system");
-		} catch (NoSuchAppDomainException e) {
-			// everything is fine.
-		}
+	}
+	
+	public List<AppDomain> findByType(String type) throws SystemException, PortalException {
+		return appDomainPersistence.findByType(type);
+	}
+	
+	public AppDomain findByCodeAndType(String code, String type) throws NoSuchAppDomainException, SystemException {
+		return appDomainPersistence.findByCode(type, code);
 	}
 	
 }

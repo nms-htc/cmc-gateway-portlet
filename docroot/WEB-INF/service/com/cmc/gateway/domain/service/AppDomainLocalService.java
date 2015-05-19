@@ -248,4 +248,14 @@ public interface AppDomainLocalService extends BaseLocalService,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.cmc.gateway.domain.model.AppDomain> findByType(
+		java.lang.String type)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.cmc.gateway.domain.model.AppDomain findByCodeAndType(
+		java.lang.String code, java.lang.String type)
+		throws com.cmc.gateway.domain.NoSuchAppDomainException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -272,6 +272,20 @@ public class AppDomainLocalServiceWrapper implements AppDomainLocalService,
 		return _appDomainLocalService.update(appDomain, serviceContext);
 	}
 
+	public java.util.List<com.cmc.gateway.domain.model.AppDomain> findByType(
+		java.lang.String type)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _appDomainLocalService.findByType(type);
+	}
+
+	public com.cmc.gateway.domain.model.AppDomain findByCodeAndType(
+		java.lang.String code, java.lang.String type)
+		throws com.cmc.gateway.domain.NoSuchAppDomainException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _appDomainLocalService.findByCodeAndType(code, type);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			
+			<p:messages globalOnly="true" closable="true"/>
+			
+			<ui:include src="/views/gw-product/tab_nav.xhtml">
+				<ui:param name="t" value="3"/>
+			</ui:include>
+
+			<br />
+			<p:commandButton icon="ui-icon-plus" action="edit_product"
+				value="${i18n['add']}" ajax="false" />
+			<hr />
+
+
+			<p:dataTable id="listTable" widgetVar="listTable"
+				value="#{productCategoryBean.lazyDataModel}" var="category"
+				rowIndexVar="index" rows="10" paginator="true"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
+				lazy="true">
+
+				<p:column headerText="#" width="40">
+					<h:outputText value="#{index + 1}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['title']}" filterBy="#{category.title}"
+					sortBy="#{category.title}">
+					<h:outputText value="${category.title}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['description']}"
+					filterBy="#{category.description}" sortBy="#{category.description}">
+					<h:outputText value="${category.description}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['action']}" width="60">
+					<p:button outcome="edit_category" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{category.categoryId}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productCategoryBean.remove(category)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-category-message']}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

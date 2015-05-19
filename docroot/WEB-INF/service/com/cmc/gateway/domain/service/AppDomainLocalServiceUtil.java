@@ -281,6 +281,20 @@ public class AppDomainLocalServiceUtil {
 		return getService().update(appDomain, serviceContext);
 	}
 
+	public static java.util.List<com.cmc.gateway.domain.model.AppDomain> findByType(
+		java.lang.String type)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByType(type);
+	}
+
+	public static com.cmc.gateway.domain.model.AppDomain findByCodeAndType(
+		java.lang.String code, java.lang.String type)
+		throws com.cmc.gateway.domain.NoSuchAppDomainException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByCodeAndType(code, type);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -118,6 +118,16 @@ public class AppDomainLocalServiceClpInvoker {
 				"com.cmc.gateway.domain.model.AppDomain",
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName112 = "findByType";
+
+		_methodParameterTypes112 = new String[] { "java.lang.String" };
+
+		_methodName113 = "findByCodeAndType";
+
+		_methodParameterTypes113 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -225,6 +235,17 @@ public class AppDomainLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
+			return AppDomainLocalServiceUtil.findByType((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName113.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
+			return AppDomainLocalServiceUtil.findByCodeAndType((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -266,4 +287,8 @@ public class AppDomainLocalServiceClpInvoker {
 	private String[] _methodParameterTypes105;
 	private String _methodName110;
 	private String[] _methodParameterTypes110;
+	private String _methodName112;
+	private String[] _methodParameterTypes112;
+	private String _methodName113;
+	private String[] _methodParameterTypes113;
 }
