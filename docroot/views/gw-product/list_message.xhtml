@@ -16,56 +16,96 @@
 			</ui:include>
 
 			<br />
-			<p:commandButton icon="ui-icon-plus" action="edit_product"
+			
+			<p:commandButton icon="ui-icon-plus" action="edit_message"
 				value="${i18n['add']}" ajax="false" />
 			<hr />
 
 
 			<p:dataTable id="listTable" widgetVar="listTable"
-				value="#{productEntryBean.lazyDataModel}" var="product"
+				value="#{productMessageBean.lazyDataModel}" var="message"
 				rowIndexVar="index" rows="10" paginator="true"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
 				lazy="true">
 
-				<!-- <p:column headerText="#" width="40">
+				<p:column headerText="#" width="40">
 					<h:outputText value="#{index + 1}" />
 				</p:column>
 
-				<p:column headerText="#{i18n['type']}" filterBy="#{domain.type}"
-					sortBy="#{domain.type}">
-					<h:outputText value="${domain.type}" />
+				<p:column headerText="#{i18n['product']}" filterBy="#{message.productId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{productEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>					
+					<h:outputText value="#{productEntryBean.getProductTitle(message.productId)}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['action-type']}"
+					filterBy="#{message.actionType}"
+					sortBy="#{message.actionType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{appDomainBean.getDomainTitle('ACTION_TYPE', message.actionType)}"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['channel']}"
+					filterBy="#{message.channel}"
+					sortBy="#{message.channel}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('CHANNEL')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{appDomainBean.getDomainTitle('CHANNEL', action.channel)}"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['cause-value']}"
+					filterBy="#{message.causeValue}"
+					sortBy="#{message.causeValue}">
+						<h:outputText value="#{message.causeValue}"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['cause']}"
+					filterBy="#{message.cause}"
+					sortBy="#{message.cause}">
+						<h:outputText value="#{message.cause}"/>
 				</p:column>
 
-				<p:column headerText="#{i18n['code']}" filterBy="#{domain.code}"
-					sortBy="#{domain.code}">
-					<h:outputText value="${domain.code}" />
+				<p:column headerText="#{i18n['language']}"
+					filterBy="#{message.languageId}"
+					sortBy="#{message.languageId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('LANGUAGE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{appDomainBean.getDomainTitle('LANGUAGE', action.languageId)}"/>
 				</p:column>
-
-				<p:column headerText="#{i18n['title']}" filterBy="#{domain.title}"
-					sortBy="#{domain.title}">
-					<h:outputText value="${domain.title}" />
-				</p:column>
-
-				<p:column headerText="#{i18n['value']}" filterBy="#{domain.value}"
-					sortBy="#{domain.value}">
-					<h:outputText value="${domain.value}" />
-				</p:column>
-
-				<p:column headerText="#{i18n['description']}"
-					filterBy="#{domain.description}" sortBy="#{domain.description}">
-					<h:outputText value="${domain.description}" />
+				
+				<p:column headerText="#{i18n['content']}"
+					filterBy="#{message.content}"
+					sortBy="#{message.content}">
+						<h:outputText value="#{message.content}"/>
 				</p:column>
 
 				<p:column headerText="#{i18n['action']}" width="60">
-					<p:button outcome="edit_appdomain" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{domain.domainId}" />
+					<p:button outcome="edit_message" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{message.messageId}" />
 					</p:button>
 
-					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{appDomainBean.remove(domain)}" update="@form">
-						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-app-domain-message']}" icon="ui-icon-alert" />
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productMessageBean.remove(message)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-message-message']}" icon="ui-icon-alert" />
 					</p:commandButton>
-				</p:column> -->
+				</p:column>
 			</p:dataTable>
 		</h:form>
 	</ui:define>

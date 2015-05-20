@@ -16,13 +16,13 @@
 			</ui:include>
 
 			<br />
-			<p:commandButton icon="ui-icon-plus" action="edit_product"
+			<p:commandButton icon="ui-icon-plus" action="edit_action"
 				value="${i18n['add']}" ajax="false" />
 			<hr />
 
 
 			<p:dataTable id="listTable" widgetVar="listTable"
-				value="#{productCategoryBean.lazyDataModel}" var="category"
+				value="#{productActionBean.lazyDataModel}" var="action"
 				rowIndexVar="index" rows="10" paginator="true"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
@@ -32,23 +32,64 @@
 					<h:outputText value="#{index + 1}" />
 				</p:column>
 
-				<p:column headerText="#{i18n['title']}" filterBy="#{category.title}"
-					sortBy="#{category.title}">
-					<h:outputText value="${category.title}" />
+				<p:column headerText="#{i18n['product']}" filterBy="#{action.productId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{productEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>					
+					<h:outputText value="#{productEntryBean.getProductTitle(action.productId)}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['action-type']}"
+					filterBy="#{action.actionType}"
+					sortBy="#{action.actionType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{appDomainBean.getDomainTitle('ACTION_TYPE', action.actionType)}"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['subscriber-type']}"
+					filterBy="#{action.subscriberType}"
+					sortBy="#{action.subscriberType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIBER_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{appDomainBean.getDomainTitle('SUBSCRIBER_TYPE', action.subscriberType)}"/>
 				</p:column>
 
+				<p:column headerText="#{i18n['command']}"
+					filterBy="#{action.commandId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{commandEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{commandEntryBean.getCommandTitle(action.getCommandId)}" />
+				</p:column>
+				
 				<p:column headerText="#{i18n['description']}"
-					filterBy="#{category.description}" sortBy="#{category.description}">
-					<h:outputText value="${category.description}" />
+					filterBy="#{action.description}"
+					sortBy="#{action.description}">
+					<h:outputText value="#{action.description}"/>
 				</p:column>
 
 				<p:column headerText="#{i18n['action']}" width="60">
-					<p:button outcome="edit_category" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{category.categoryId}" />
+					<p:button outcome="edit_action" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{action.actionId}" />
 					</p:button>
 
-					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productCategoryBean.remove(category)}" update="@form">
-						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-category-message']}" icon="ui-icon-alert" />
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productActionBean.remove(action)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-action-message']}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

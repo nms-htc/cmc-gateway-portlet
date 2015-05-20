@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 import com.cmc.gateway.domain.model.ProvisioningEntry;
 import com.cmc.gateway.domain.service.ProvisioningEntryLocalServiceUtil;
@@ -20,8 +21,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 public class ProvisioningEntryBean extends AbstractCRUDBean<ProvisioningEntry> implements Serializable {
 
 	private static final long serialVersionUID = 6975327274200645693L;
-	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(ProvisioningEntryBean.class);
+	
+	private SelectItem[] items;
 
 	@Override
 	protected ProvisioningEntry initEntity() {
@@ -85,6 +87,34 @@ public class ProvisioningEntryBean extends AbstractCRUDBean<ProvisioningEntry> i
 	@Override
 	protected Searcher getSearcher() {
 		return null;
+	}
+	
+	public SelectItem[] getItems() {
+		if (items == null) {
+			try {
+				List<ProvisioningEntry> entries = queryEntities(createDymanicQuery());
+				items = new SelectItem[entries.size()];
+				for (int i = 0; i < entries.size(); i++) {
+					ProvisioningEntry entry = entries.get(i);
+					items[i] = new SelectItem(entry.getProvisioningId(), entry.getTitle());
+				}
+			} catch (Exception e) {
+				logger.error(e);
+			}
+		}
+		
+		return items;
+	}
+	
+	public String getProvisioningTitle(long provisioningId) {
+		String title = null;
+		try {
+			ProvisioningEntry provisioning = findById(provisioningId);
+			title = provisioning.getTitle();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return title;
 	}
 
 }

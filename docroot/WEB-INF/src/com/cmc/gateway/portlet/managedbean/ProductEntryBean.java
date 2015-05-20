@@ -111,5 +111,16 @@ public class ProductEntryBean extends AbstractCRUDBean<ProductEntry> implements
 		}
 		return items;
 	}
+	
+	public String getProductTitle(long productId) {
+		String title = null;
+		try {
+			ProductEntry product = findById(productId);
+			title = product.getTitle();
+		} catch (Exception e) {
+			logger.error("Cannot fetch product entry with productId = {0}, Error message: {1}", productId, e.getMessage());
+		}
+		return title;
+	}
 
 }

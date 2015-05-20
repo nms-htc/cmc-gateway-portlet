@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			<p:messages globalOnly="true" closable="true" />
+
+			<p:panel header="">
+			
+				<f:facet name="header">
+					<h:outputText value="${i18n['add-new-product-message']}" 
+						rendered="${productMessageBean.current.messageId == 0}"/>
+					<h:outputText value="${i18n['update-product-message']}" 
+						rendered="${productMessageBean.current.messageId != 0}"/>
+				</f:facet>
+
+				<h:panelGrid columns="3" styleClass="panel-grid-form"
+					columnClasses="form-label">
+					
+					<p:outputLabel value="${i18n['action-type']}" for="actionType" />
+					<p:selectOneMenu id="actionType" value="#{productMessageBean.current.actionType}">
+						<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}" />
+					</p:selectOneMenu>
+					<p:message for="actionType" />
+					
+					<p:outputLabel value="#{i18n['product']}" for="productId"/>
+					<p:selectOneMenu id="productId" value="#{productMessageBean.current.productId}">
+						<f:selectItems value="#{productEntryBean.items}"/>
+					</p:selectOneMenu>
+					<p:message for="productId"/>
+					
+					<p:outputLabel value="#{i18n['channel']}" for="channel"/>
+					<p:selectOneMenu id="channel" value="#{productMessageBean.current.channel}">
+						<f:selectItems value="#{appDomainBean.getStringItems('CHANNEL')}"/>
+					</p:selectOneMenu>
+					<p:message for="channel"/>
+					
+					<p:outputLabel value="#{i18n['language']}" for="languageId"/>
+					<p:selectOneMenu id="languageId" value="#{productMessageBean.current.languageId}">
+						<f:selectItems value="#{appDomainBean.getStringItems('LANGUAGE')}"/>
+					</p:selectOneMenu>
+					<p:message for="languageId"/>
+					
+					<p:outputLabel for="causeValue" value="#{i18n['cause-value']}"/>
+					<p:inputText id="causeValue" value="#{productMessageBean.current.causeValue}" size="30"/>
+					<p:message for="causeValue"/>
+					
+					<p:outputLabel value="${i18n['cause']}" for="cause" />
+					<p:inputTextarea id="cause"
+						value="#{productMessageBean.current.cause}" cols="30" />
+					<p:message for="cause" />
+					
+					<p:outputLabel value="${i18n['content']}" for="content" />
+					<p:inputTextarea id="content"
+						value="#{productMessageBean.current.content}" cols="30" />
+					<p:message for="content" />
+
+					<p:outputLabel value="${i18n['description']}" for="description" />
+					<p:inputTextarea id="description"
+						value="#{productMessageBean.current.description}" cols="30" />
+					<p:message for="description" />
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton id="persistBtn" value="${i18n['save']}"
+						icon="ui-icon-disk" update="@form"
+						actionListener="#{productMessageBean.persist()}"
+						validateClient="true"
+						rendered="#{productMessageBean.current.messageId == 0}" />
+
+					<p:commandButton id="updateBtn" value="${i18n['update']}"
+						icon="ui-icon-disk" update="@form"
+						actionListener="#{productMessageBean.update()}"
+						validateClient="true"
+						rendered="#{productMessageBean.current.messageId != 0}" />
+
+					<p:button id="cancelBtn" value="${i18n['cancel']}" icon="ui-icon-cancel"
+						outcome="list_message" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

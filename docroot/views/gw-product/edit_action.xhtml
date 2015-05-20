@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			<p:messages globalOnly="true" closable="true" />
+
+			<p:panel>
+			
+				<f:facet name="header">
+					<h:outputText value="${i18n['add-new-product-action']}" 
+						rendered="${productActionBean.current.actionId == 0}"/>
+					<h:outputText value="${i18n['update-product-action']}" 
+						rendered="${productActionBean.current.actionId != 0}"/>
+				</f:facet>
+
+				<h:panelGrid columns="3" styleClass="panel-grid-form"
+					columnClasses="form-label">
+					
+					<p:outputLabel value="${i18n['action-type']}" for="actionType" />
+					<p:selectOneMenu id="actionType" value="#{productActionBean.current.actionType}" required="true">
+						<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}" />
+					</p:selectOneMenu>
+					<p:message for="actionType" />
+					
+					<p:outputLabel value="#{i18n['product']}" for="productId"/>
+					<p:selectOneMenu id="productId" value="#{productActionBean.current.productId}" required="true">
+						<f:selectItems value="#{productEntryBean.items}"/>
+					</p:selectOneMenu>
+					<p:message for="productId"/>
+					
+					<p:outputLabel value="#{i18n['subscriber-type']}" for="subscriberType"/>
+					<p:selectOneMenu id="subscriberType" value="#{productActionBean.current.subscriberType}">
+						<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIBER_TYPE')}"/>
+					</p:selectOneMenu>
+					<p:message for="subscriberType"/>
+
+					<p:outputLabel value="#{i18n['command']}" for="commandId"/>
+					<p:selectOneMenu id="commandId" value="#{productActionBean.current.commandId}" required="true">
+						<f:selectItems value="#{commandEntryBean.items}"/>
+					</p:selectOneMenu>
+					<p:message for="commandId"/>
+					
+					<p:outputLabel value="${i18n['description']}" for="description" />
+					<p:inputTextarea id="description"
+						value="#{productActionBean.current.description}" cols="30" />
+					<p:message for="description" />
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton id="persistBtn" value="${i18n['save']}"
+						icon="ui-icon-disk" update="@form"
+						actionListener="#{productActionBean.persist()}"
+						validateClient="true"
+						rendered="#{productActionBean.current.actionId == 0}" />
+
+					<p:commandButton id="updateBtn" value="${i18n['update']}"
+						icon="ui-icon-disk" update="@form"
+						actionListener="#{productActionBean.update()}"
+						validateClient="true"
+						rendered="#{productActionBean.current.actionId != 0}" />
+
+					<p:button id="cancelBtn" value="${i18n['cancel']}" icon="ui-icon-cancel"
+						outcome="list_action" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

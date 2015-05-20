@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 import com.cmc.gateway.domain.model.CommandEntry;
 import com.cmc.gateway.domain.service.CommandEntryLocalServiceUtil;
@@ -20,8 +21,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 public class CommandEntryBean extends AbstractCRUDBean<CommandEntry> implements Serializable{
 
 	private static final long serialVersionUID = 1126113998589873977L;
-	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(CommandEntryBean.class);
+	
+	private SelectItem[] items;
 
 	@Override
 	protected CommandEntry initEntity() {
@@ -85,6 +87,33 @@ public class CommandEntryBean extends AbstractCRUDBean<CommandEntry> implements 
 	@Override
 	protected Searcher getSearcher() {
 		return null;
+	}
+	
+	public SelectItem[] getItems() {
+		if (items == null) {
+			try {
+				List<CommandEntry> entries = queryEntities(createDymanicQuery());
+				items = new SelectItem[entries.size()];
+				for (int i = 0; i < entries.size(); i++) {
+					CommandEntry entry = entries.get(i);
+					items[i] = new SelectItem(entry.getCompanyId(), entry.getTitle());
+				}
+			} catch (Exception e) {
+				logger.error(e);
+			}
+		}
+		return items;
+	}
+	
+	public String getCommandTitle(long commandId) {
+		String title = null;
+		try {
+			CommandEntry entry = findById(commandId);
+			title = entry.getTitle();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return title;
 	}
 
 }

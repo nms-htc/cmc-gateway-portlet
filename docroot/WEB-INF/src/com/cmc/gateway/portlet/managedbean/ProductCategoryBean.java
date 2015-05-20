@@ -106,5 +106,16 @@ public class ProductCategoryBean extends AbstractCRUDBean<ProductCategory> imple
 		
 		return items;
 	}
+	
+	public String getCategoryTitle(long categoryId) {
+		String title = null;
+		try {
+			ProductCategory category = findById(categoryId);
+			title = category.getTitle();
+		} catch (Exception e) {
+			logger.error("Cannot fetch product category with categoryId = {0}, Error: {1}", categoryId, e.getMessage());
+		}
+		return title;
+	}
 
 }
