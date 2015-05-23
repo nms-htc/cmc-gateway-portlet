@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			<p:messages globalOnly="true" closable="true" />
+
+			<p:panel header="">
+
+				<f:facet name="header">
+					<h:outputText value="${i18n['add-new-provisioning-action']}" rendered="${provisioningActionBean.current.actionId == 0}" />
+					<h:outputText value="${i18n['update-provisioning-action']}" rendered="${provisioningActionBean.current.actionId != 0}" />
+				</f:facet>
+
+				<h:panelGrid columns="3" styleClass="panel-grid-form" columnClasses="form-label">
+
+					<p:outputLabel value="${i18n['provisioning-id']}" for="provisioningId" />
+					<p:selectOneMenu id="provisioningId" value="#{provisioningActionBean.current.provisioningId}">
+						<f:selectItems value="#{provisioningEntryBean.items}"/>
+					</p:selectOneMenu>
+					<p:message for="provisioningId" />
+					
+					<p:outputLabel value="${i18n['commmand-id']}" for="commandId" />
+					<p:selectOneMenu id="commandId" value="#{provisioningActionBean.current.commandId}">
+						<f:selectItems value="#{commandEntryBean.items}"/>
+					</p:selectOneMenu>
+					<p:message for="commandId" />
+					
+					<p:outputLabel value="#{i18n['priority']}" for="priority"/>
+					<p:inputText id="priority" value="#{provisioningActionBean.current.priority}" size="30"/>
+					<p:message for="priority"/>
+					
+					<p:outputLabel value="#{i18n['timeout']}" for="timeout"/>
+					<p:inputText id="timeout" value="#{provisioningActionBean.current.timeout}" size="30"/>
+					<p:message for="timeout"/>
+					
+					<p:outputLabel value="#{i18n['retryEnable']}" for="retryEnable"/>
+					<p:selectBooleanCheckbox id="retryEnable" value="#{provisioningActionBean.current.retryEnable}"/>
+					<p:message for="retryEnable"/>
+					
+					<p:outputLabel value="#{i18n['max-retry']}" for="maxRetry"/>
+					<p:inputText id="maxRetry" value="#{provisioningActionBean.current.maxRetry}" size="30"/>
+					<p:message for="maxRetry"/>
+					
+					<p:outputLabel value="#{i18n['log-enable']}" for="logEnable"/>
+					<p:selectBooleanCheckbox id="logEnable" value="#{provisioningActionBean.current.logEnable}"/>
+					<p:message for="logEnable"/>
+					
+					<p:outputLabel value="#{i18n['process-class']}" for="processClass"/>
+					<p:inputText id="processClass" value="#{provisioningActionBean.current.processClass}" size="30"/>
+					<p:message for="processClass"/>
+					
+					<p:outputLabel value="#{i18n['process-method']}" for="processMethod"/>
+					<p:inputText id="processMethod" value="#{provisioningActionBean.current.processMethod}" size="30"/>
+					<p:message for="processMethod"/>
+					
+					<p:outputLabel value="#{i18n['status']}" for="status"/>
+					<p:selectOneMenu id="status" value="#{provisioningActionBean.current.status}">
+						<f:selectItems value="#{appDomainBean.getIntItems('PROVISIONGING_ACTION_STATUS')}"/>
+					</p:selectOneMenu>
+					<p:message for="status"/>
+
+					<p:outputLabel value="${i18n['description']}" for="description" />
+					<p:inputTextarea id="description" value="#{provisioningActionBean.current.description}" cols="30" />
+					<p:message for="description" />
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton id="persistBtn" value="${i18n['save']}" icon="ui-icon-disk" update="@form" actionListener="#{provisioningActionBean.persist()}"
+						validateClient="true" rendered="#{provisioningActionBean.current.actionId == 0}" />
+
+					<p:commandButton id="updateBtn" value="${i18n['update']}" icon="ui-icon-disk" update="@form" actionListener="#{provisioningActionBean.update()}"
+						validateClient="true" rendered="#{provisioningActionBean.current.actionId != 0}" />
+
+					<p:button id="cancelBtn" value="${i18n['cancel']}" icon="ui-icon-cancel" outcome="list_action" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

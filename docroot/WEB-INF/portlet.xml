@@ -41,7 +41,7 @@
 		</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/gw-provisioning/view.xhtml</value>
+			<value>/views/gw-provisioning/list_provisioning.xhtml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

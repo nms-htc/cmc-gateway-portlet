@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			
+			<p:messages globalOnly="true" closable="true"/>
+			
+			<ui:include src="/views/gw-provisioning/tab_nav.xhtml" >
+				<ui:param name="t" value="1"/>
+			</ui:include>
+
+			<br />
+			<p:commandButton icon="ui-icon-plus" action="edit_action"
+				value="${i18n['add']}" ajax="false" />
+			<hr />
+
+
+			<p:dataTable id="listTable" widgetVar="listTable"
+				value="#{provisioningActionBean.lazyDataModel}" var="action"
+				rowIndexVar="index" rows="10" paginator="true"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
+				lazy="true">
+
+				<p:column headerText="#" width="40">
+					<h:outputText value="#{index + 1}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['provisioning-entry']}" filterBy="#{action.provisioningId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItems value="#{provisioningEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{provisioningEntryBean.getProvisioningTitle(action.provisioningId)}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['command']}" filterBy="#{action.commandId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItems value="#{commandEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${commandEntryBean.getCommandTitle(action.commandId)}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['process-class']}"
+					filterBy="#{action.processClass}" sortBy="#{action.processClass}">
+					<h:outputText value="${action.processClass}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['process-method']}"
+					filterBy="#{action.processMethod}" sortBy="#{action.processMethod}">
+					<h:outputText value="${action.processMethod}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['description']}"
+					filterBy="#{action.description}" sortBy="#{action.description}">
+					<h:outputText value="${action.description}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['status']}"
+					sortBy="#{action.status}">
+					<h:outputText value="#{appDomainBean.getDomainTitle('PROVISIONING_ACTION_STATUS'.concat('-').concat(action.status))}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['action']}" width="60">
+					<p:button outcome="edit_action" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{provisioning.actionId}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{provisioningActionBean.remove(provisioning)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-provisioning-action-message']}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

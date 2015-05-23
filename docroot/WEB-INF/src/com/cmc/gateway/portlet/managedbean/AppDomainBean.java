@@ -152,14 +152,17 @@ public class AppDomainBean extends AbstractCRUDBean<AppDomain> implements Serial
 		return items;
 	}
 	
-	public String getDomainTitle(String type, String code) {
+	public String getDomainTitle(String typeCode) {
 		String title = null;
 		
 		try {
+			String[] typeCodes = typeCode.split("-");
+			String type = typeCodes[0];
+			String code = typeCodes[1];
 			AppDomain appDomain = AppDomainLocalServiceUtil.findByCodeAndType(code, type);
 			title = appDomain.getTitle();
 		} catch (Exception e) {
-			logger.error("Error when try get title of domain with type = {0}, code = {1}, Error: {2}", type, code, e.getMessage());
+			logger.error("Error when try get title of domain with typeCode = {0}, Error: {1}", typeCode, e.getMessage());
 		}
 		
 		return title;

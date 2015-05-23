@@ -51,7 +51,7 @@
 							<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{appDomainBean.getDomainTitle('ACTION_TYPE', action.actionType)}"/>
+					<h:outputText value="#{appDomainBean.getDomainTitle('ACTION_TYPE'.concat('-').concat(action.actionType))}"/>
 				</p:column>
 				
 				<p:column headerText="#{i18n['subscriber-type']}"
@@ -63,7 +63,7 @@
 							<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIBER_TYPE')}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{appDomainBean.getDomainTitle('SUBSCRIBER_TYPE', action.subscriberType)}"/>
+					<h:outputText value="#{appDomainBean.getDomainTitle('SUBSCRIBER_TYPE'.concat('-').concat(action.subscriberType))}"/>
 				</p:column>
 
 				<p:column headerText="#{i18n['command']}"

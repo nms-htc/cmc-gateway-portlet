@@ -52,7 +52,7 @@
 							<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{appDomainBean.getDomainTitle('ACTION_TYPE', message.actionType)}"/>
+					<h:outputText value="#{appDomainBean.getDomainTitle('ACTION_TYPE'.concat('-').concat(message.actionType))}"/>
 				</p:column>
 				
 				<p:column headerText="#{i18n['channel']}"
@@ -64,7 +64,7 @@
 							<f:selectItems value="#{appDomainBean.getStringItems('CHANNEL')}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{appDomainBean.getDomainTitle('CHANNEL', action.channel)}"/>
+					<h:outputText value="#{appDomainBean.getDomainTitle('CHANNEL'.concat('-').concat(message.channel))}"/>
 				</p:column>
 				
 				<p:column headerText="#{i18n['cause-value']}"
@@ -88,7 +88,7 @@
 							<f:selectItems value="#{appDomainBean.getStringItems('LANGUAGE')}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{appDomainBean.getDomainTitle('LANGUAGE', action.languageId)}"/>
+					<h:outputText value="#{appDomainBean.getDomainTitle('LANGUAGE'.concat('-').concat(message.languageId))}"/>
 				</p:column>
 				
 				<p:column headerText="#{i18n['content']}"

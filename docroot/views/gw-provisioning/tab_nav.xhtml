@@ -7,9 +7,17 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	
-	<p:tabMenu activeIndex="${param.t eq null ? 0 : param.t}">
-		<p:menuitem outcome="/views/gw-config/list_appdomain.xhtml" value="${i18n['app-domain']}">
-			<f:param name="t" value="0"/>
-		</p:menuitem>
+	<p:tabMenu activeIndex="${t}">
+		<p:menuitem outcome="/views/gw-provisioning/list_provisioning.xhtml" value="${i18n['provisioning-entry']}"/>
+		
+		<p:menuitem outcome="/views/gw-provisioning/list_action.xhtml" value="${i18n['action']}"/>
+		
+		<p:menuitem outcome="/views/gw-provisioning/list_route.xhtml" value="${i18n['route']}"/>
+		
+		<p:menuitem outcome="/views/gw-provisioning/list_command.xhtml" value="${i18n['command']}"/>
+		
+		<p:menuitem outcome="/views/gw-provisioning/list_command_action.xhtml" value="${i18n['command-action']}"/>
+		
+		<p:menuitem outcome="/views/gw-provisioning/list_message.xhtml" value="${i18n['message']}"/>
 	</p:tabMenu>
 </ui:component>

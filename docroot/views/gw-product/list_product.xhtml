@@ -54,7 +54,7 @@
 				
 				<p:column headerText="#{i18n['status']}"
 					sortBy="#{product.status}">
-					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_STATUS', product.status)}" />
+					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_STATUS'.concat('-').concat(product.status))}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['action']}" width="60">

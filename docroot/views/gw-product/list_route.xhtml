@@ -30,8 +30,8 @@
 				
 				<p:column headerText="#{i18n['channel']}" filterBy="#{route.channel}"
 					sortBy="#{route.channel}">
-					<h:outputText value="${route.channel}" />
-		routekeyword		</p:column>
+					<h:outputText value="#{appDomainBean.getDomainTitle('CHANNEL'.concat('-').concat(route.channel))}" />
+				</p:column>
 
 				<p:column headerText="#{i18n['service-address']}" filterBy="#{route.serviceAddress}"
 					sortBy="#{route.serviceAddress}">
@@ -59,7 +59,7 @@
 				
 				<p:column headerText="#{i18n['status']}"
 					sortBy="#{route.status}">
-					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_ROUTE_STATUS', route.status)}" />
+					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_ROUTE_STATUS'.concat('-').concat(route.status))}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['action']}" width="60">

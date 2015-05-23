@@ -55,6 +55,14 @@ public class ProvisioningEntryLocalServiceImpl
 			provisioningEntry.setCompanyId(serviceContext.getCompanyId());
 			provisioningEntry.setCreateDate(serviceContext.getCreateDate());
 			provisioningEntry.setModifiedDate(serviceContext.getModifiedDate());
+			
+			try {
+				provisioningEntryPersistence.findByCode(provisioningEntry.getCode());
+				throw new PortalException("code-has-been-exist-in-the-system");
+			} catch (NoSuchProvisioningEntryException e) {
+				// GOOD
+			}
+			
 		} else {
 			provisioningEntry.setModifiedDate(serviceContext.getModifiedDate());
 		}
@@ -67,11 +75,5 @@ public class ProvisioningEntryLocalServiceImpl
 	private void validate(ProvisioningEntry provisioningEntry) throws PortalException, SystemException {
 		ValidateUtil.checkNull(provisioningEntry.getCode(), "code");
 		ValidateUtil.checkNull(provisioningEntry.getTitle(), "title");
-		try {
-			provisioningEntryPersistence.findByCode(provisioningEntry.getCode());
-			throw new PortalException("code-has-been-exist-in-the-system");
-		} catch (NoSuchProvisioningEntryException e) {
-			// GOOD
-		}
 	}
 }
