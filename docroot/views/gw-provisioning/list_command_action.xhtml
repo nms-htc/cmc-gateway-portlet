@@ -11,7 +11,7 @@
 			
 			<p:messages globalOnly="true" closable="true"/>
 			
-			<ui:include src="/views/gw-product/tab_nav.xhtml" >
+			<ui:include src="/views/gw-provisioning/tab_nav.xhtml" >
 				<ui:param name="t" value="4"/>
 			</ui:include>
 
@@ -22,7 +22,7 @@
 
 
 			<p:dataTable id="listTable" widgetVar="listTable"
-				value="#{productEntryBean.lazyDataModel}" var="product"
+				value="#{commandActionBean.lazyDataModel}" var="action"
 				rowIndexVar="index" rows="10" paginator="true"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
@@ -32,38 +32,83 @@
 					<h:outputText value="#{index + 1}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['code']}" filterBy="#{product.code}"
-					sortBy="#{product.code}">
-					<h:outputText value="${product.code}" />
-				</p:column>
-
-				<p:column headerText="#{i18n['title']}" filterBy="#{product.title}"
-					sortBy="#{product.title}">
-					<h:outputText value="${product.title}" />
+				<p:column headerText="#{i18n['command-entry']}" filterBy="#{action.commandId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{commandEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${commandEntryBean.getCommandTitle(action.commandId)}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['type']}" filterBy="#{product.productType}"
-					sortBy="#{product.productType}">
-					<h:outputText value="${product.productType}" />
+				<p:column headerText="#{i18n['product-entry']}" filterBy="#{action.productId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{productEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${productEntryBean.getProductTitle(action.productId)}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['action-type']}" filterBy="#{action.actionType}" sortBy="#{action.actionType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${appDomainBean.getDomainTitle('ACTION_TYPE'.concat('-').concat(action.actionType))}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['subscriber-type']}" filterBy="#{action.subscriberType}" sortBy="#{action.subscriberType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIBER_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${appDomainBean.getDomainTitle('SUBSCRIBER_TYPE'.concat('-').concat(action.subscriberType))}" />
 				</p:column>
 
+				<p:column headerText="#{i18n['action-name']}" filterBy="#{action.actionName}"
+					sortBy="#{action.actionName}">
+					<h:outputText value="${action.actionName}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['next-action-type']}" filterBy="#{action.nextActionType}" sortBy="#{action.nextActionType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('ACTION_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${appDomainBean.getDomainTitle('ACTION_TYPE'.concat('-').concat(action.nextActionType))}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['next-command-entry']}" filterBy="#{action.nextCommandId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{commandEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${commandEntryBean.getCommandTitle(action.nextCommandId)}" />
+				</p:column>
+				
 				<p:column headerText="#{i18n['description']}"
-					filterBy="#{product.description}" sortBy="#{product.description}">
-					<h:outputText value="${product.description}" />
-				</p:column>
-				
-				<p:column headerText="#{i18n['status']}"
-					sortBy="#{product.status}">
-					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_STATUS'.concat('-').concat(product.status))}" />
+					filterBy="#{action.description}" sortBy="#{action.description}">
+					<h:outputText value="${action.description}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['action']}" width="60">
-					<p:button outcome="edit_product" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{product.productId}" />
+					<p:button outcome="edit_command_action" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{action.actionId}" />
 					</p:button>
 
-					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productEntryBean.remove(product)}" update="@form">
-						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-message']}" icon="ui-icon-alert" />
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{commandActionBean.remove(action)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-command-action-message']}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

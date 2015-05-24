@@ -11,7 +11,7 @@
 			
 			<p:messages globalOnly="true" closable="true"/>
 			
-			<ui:include src="/views/gw-product/tab_nav.xhtml" >
+			<ui:include src="/views/gw-provisioning/tab_nav.xhtml" >
 				<ui:param name="t" value="3"/>
 			</ui:include>
 
@@ -22,7 +22,7 @@
 
 
 			<p:dataTable id="listTable" widgetVar="listTable"
-				value="#{productEntryBean.lazyDataModel}" var="product"
+				value="#{commandEntryBean.lazyDataModel}" var="command"
 				rowIndexVar="index" rows="10" paginator="true"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
@@ -32,38 +32,43 @@
 					<h:outputText value="#{index + 1}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['code']}" filterBy="#{product.code}"
-					sortBy="#{product.code}">
-					<h:outputText value="${product.code}" />
+				<p:column headerText="#{i18n['code']}" filterBy="#{command.code}"
+					sortBy="#{command.code}">
+					<h:outputText value="${command.code}" />
 				</p:column>
 
-				<p:column headerText="#{i18n['title']}" filterBy="#{product.title}"
-					sortBy="#{product.title}">
-					<h:outputText value="${product.title}" />
+				<p:column headerText="#{i18n['title']}" filterBy="#{command.title}"
+					sortBy="#{command.title}">
+					<h:outputText value="${command.title}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['type']}" filterBy="#{product.productType}"
-					sortBy="#{product.productType}">
-					<h:outputText value="${product.productType}" />
+				<p:column headerText="#{i18n['type']}" filterBy="#{command.provisioningType}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{appDomainBean.getStringItems('PROVISIONING_TYPE')}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${appDomainBean.getDomainTitle('PROVISIONING_TYPE'.concat('-').concat(command.provisioningType))}" />
 				</p:column>
 
 				<p:column headerText="#{i18n['description']}"
-					filterBy="#{product.description}" sortBy="#{product.description}">
-					<h:outputText value="${product.description}" />
+					filterBy="#{command.description}" sortBy="#{command.description}">
+					<h:outputText value="${command.description}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['status']}"
-					sortBy="#{product.status}">
-					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_STATUS'.concat('-').concat(product.status))}" />
+					sortBy="#{command.status}">
+					<h:outputText value="#{appDomainBean.getDomainTitle('COMMAND_STATUS'.concat('-').concat(command.status))}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['action']}" width="60">
-					<p:button outcome="edit_product" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{product.productId}" />
+					<p:button outcome="edit_command" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{command.commandId}" />
 					</p:button>
 
-					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productEntryBean.remove(product)}" update="@form">
-						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-message']}" icon="ui-icon-alert" />
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{commandEntryBean.remove(command)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-command-entry-message']}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

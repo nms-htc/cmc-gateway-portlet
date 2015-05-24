@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	template="/views/common/common_temp.xhtml">
+	<ui:define name="main">
+		<h:form id="form">
+			<p:messages globalOnly="true" closable="true" />
+
+			<p:panel header="">
+
+				<f:facet name="header">
+					<h:outputText value="${i18n['add-new-provisioning-route']}" rendered="${provisioningRouteBean.current.routeId == 0}" />
+					<h:outputText value="${i18n['update-provisioning-route']}" rendered="${provisioningRouteBean.current.routeId != 0}" />
+				</f:facet>
+
+				<h:panelGrid columns="3" styleClass="panel-grid-form" columnClasses="form-label">
+
+					<p:outputLabel value="${i18n['provisioning-id']}" for="provisioningId" />
+					<p:selectOneMenu id="provisioningId" value="#{provisioningRouteBean.current.provisioningId}">
+						<f:selectItems value="#{provisioningEntryBean.items}"/>
+					</p:selectOneMenu>
+					<p:message for="provisioningId" />
+					
+					<p:outputLabel value="${i18n['provisioning-type']}" for="provisioningType" />
+					<p:selectOneMenu id="provisioningType" value="#{provisioningRouteBean.current.provisioningType}">
+						<f:selectItems value="#{appDomainBean.getStringItems('PROVISIONING_TYPE')}"/>
+					</p:selectOneMenu>
+					<p:message for="provisioningType" />
+					
+					<p:outputLabel value="#{i18n['route-key']}" for="routeKey"/>
+					<p:inputText id="routeKey" value="#{provisioningRouteBean.current.routeKey}" size="30"/>
+					<p:message for="routeKey"/>
+					
+					<p:outputLabel value="#{i18n['route-type]}" for="routeType"/>
+					<p:inputText id="routeType" value="#{provisioningRouteBean.current.routeType}" size="30"/>
+					<p:message for="routeType"/>
+					
+					<p:outputLabel value="${i18n['description']}" for="description" />
+					<p:inputTextarea id="description" value="#{provisioningRouteBean.current.description}" cols="30" />
+					<p:message for="description" />
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton id="persistBtn" value="${i18n['save']}" icon="ui-icon-disk" update="@form" actionListener="#{provisioningRouteBean.persist()}"
+						validateClient="true" rendered="#{provisioningRouteBean.current.routeId == 0}" />
+
+					<p:commandButton id="updateBtn" value="${i18n['update']}" icon="ui-icon-disk" update="@form" actionListener="#{provisioningRouteBean.update()}"
+						validateClient="true" rendered="#{provisioningRouteBean.current.routeId != 0}" />
+
+					<p:button id="cancelBtn" value="${i18n['cancel']}" icon="ui-icon-cancel" outcome="list_route" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
