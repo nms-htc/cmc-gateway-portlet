@@ -96,8 +96,9 @@ public class CommandEntryBean extends AbstractCRUDBean<CommandEntry> implements 
 				items = new SelectItem[entries.size()];
 				for (int i = 0; i < entries.size(); i++) {
 					CommandEntry entry = entries.get(i);
-					items[i] = new SelectItem(entry.getCompanyId(), entry.getTitle());
+					items[i] = new SelectItem(entry.getCommandId(), entry.getTitle());
 				}
+				
 			} catch (Exception e) {
 				logger.error(e);
 			}

@@ -42,7 +42,7 @@
 					<h:outputText value="${command.title}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['type']}" filterBy="#{command.provisioningType}">
+				<p:column headerText="#{i18n['provisioning-type']}" filterBy="#{command.provisioningType}">
 					<f:facet name="filter">
 						<p:selectOneMenu onchange="PF('listTable').filter()">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>

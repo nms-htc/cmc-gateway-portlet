@@ -34,12 +34,12 @@
 				
 				<p:column headerText="#{i18n['command-entry']}" filterBy="#{action.commandId}">
 					<f:facet name="filter">
-						<p:selectOneMenu onchange="PF('listTable').filter()">
+						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Long">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{commandEntryBean.items}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="${commandEntryBean.getCommandTitle(action.commandId)}" />
+					<h:outputText value="#{commandEntryBean.getCommandTitle(action.commandId)}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['product-entry']}" filterBy="#{action.productId}">

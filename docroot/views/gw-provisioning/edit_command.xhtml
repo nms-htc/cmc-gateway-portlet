@@ -9,8 +9,8 @@
 			<p:panel header="">
 
 				<f:facet name="header">
-					<h:outputText value="${i18n['add-new-comand-entry']}" rendered="${commandEntryBean.current.commandId == 0}" />
-					<h:outputText value="${i18n['update-comand-entry']}" rendered="${commandEntryBean.current.commandId != 0}" />
+					<h:outputText value="${i18n['add-new-command-entry']}" rendered="#{commandEntryBean.current.commandId == 0}" />
+					<h:outputText value="${i18n['update-command-entry']}" rendered="#{commandEntryBean.current.commandId != 0}" />
 				</f:facet>
 
 				<h:panelGrid columns="3" styleClass="panel-grid-form" columnClasses="form-label">
@@ -29,15 +29,15 @@
 					<p:inputText id="title" value="#{commandEntryBean.current.title}" size="30" required="true"/>
 					<p:message for="title"/>
 					
-					<p:outputLabel value="#{i18n['priority]}" for="priority"/>
+					<p:outputLabel value="#{i18n['priority']}" for="priority"/>
 					<p:inputText id="priority" value="#{commandEntryBean.current.priority}" size="30"/>
 					<p:message for="priority"/>
 					
-					<p:outputLabel value="#{i18n['timeout]}" for="routeType"/>
-					<p:inputText id="routeType" value="#{commandEntryBean.current.routeType}" size="30"/>
-					<p:message for="routeType"/>
+					<p:outputLabel value="#{i18n['timeout']}" for="timeout"/>
+					<p:inputText id="timeout" value="#{commandEntryBean.current.timeout}" size="30"/>
+					<p:message for="timeout"/>
 					
-					<p:outputLabel value="#{i18n['retry-enable]}" for="retryEnable"/>
+					<p:outputLabel value="#{i18n['retry-enable']}" for="retryEnable"/>
 					<p:selectBooleanCheckbox id="retryEnable" value="#{commandEntryBean.current.retryEnable}"/>
 					<p:message for="retryEnable"/>
 					
@@ -45,7 +45,7 @@
 					<p:inputText id="maxRetry" value="#{commandEntryBean.current.maxRetry}" size="30"/>
 					<p:message for="maxRetry"/>
 					
-					<p:outputLabel value="#{i18n['log-enable]}" for="logEnable"/>
+					<p:outputLabel value="#{i18n['log-enable']}" for="logEnable"/>
 					<p:selectBooleanCheckbox id="logEnable" value="#{commandEntryBean.current.logEnable}"/>
 					<p:message for="logEnable"/>
 					

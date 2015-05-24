@@ -9,8 +9,8 @@
 			<p:panel header="">
 
 				<f:facet name="header">
-					<h:outputText value="${i18n['add-new-comand-action']}" rendered="${commandActionBean.current.actionId == 0}" />
-					<h:outputText value="${i18n['update-comand-action']}" rendered="${commandActionBean.current.actionId != 0}" />
+					<h:outputText value="${i18n['add-new-command-action']}" rendered="${commandActionBean.current.actionId == 0}" />
+					<h:outputText value="${i18n['update-command-action']}" rendered="${commandActionBean.current.actionId != 0}" />
 				</f:facet>
 
 				<h:panelGrid columns="3" styleClass="panel-grid-form" columnClasses="form-label">
@@ -21,8 +21,8 @@
 					</p:selectOneMenu>
 					<p:message for="commandId"/>
 					
-					<p:outputLabel value="#{i18n['product-id']}" for="productId"/>
-					<p:selectOneMenu id="productId" value="#{productActionBean.current.productId}">
+					<p:outputLabel value="#{i18n['product']}" for="productId"/>
+					<p:selectOneMenu id="productId" value="#{commandActionBean.current.productId}">
 						<f:selectItems value="#{productEntryBean.items}"/>
 					</p:selectOneMenu>
 					<p:message for="productId"/>

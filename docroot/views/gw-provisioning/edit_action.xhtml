@@ -21,7 +21,7 @@
 					</p:selectOneMenu>
 					<p:message for="provisioningId" />
 					
-					<p:outputLabel value="${i18n['commmand-id']}" for="commandId" />
+					<p:outputLabel value="${i18n['command-id']}" for="commandId" />
 					<p:selectOneMenu id="commandId" value="#{provisioningActionBean.current.commandId}">
 						<f:selectItems value="#{commandEntryBean.items}"/>
 					</p:selectOneMenu>
@@ -35,7 +35,7 @@
 					<p:inputText id="timeout" value="#{provisioningActionBean.current.timeout}" size="30"/>
 					<p:message for="timeout"/>
 					
-					<p:outputLabel value="#{i18n['retryEnable']}" for="retryEnable"/>
+					<p:outputLabel value="#{i18n['retry-enable']}" for="retryEnable"/>
 					<p:selectBooleanCheckbox id="retryEnable" value="#{provisioningActionBean.current.retryEnable}"/>
 					<p:message for="retryEnable"/>
 					

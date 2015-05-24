@@ -103,7 +103,6 @@ public class ProductEntryBean extends AbstractCRUDBean<ProductEntry> implements
 				for (int i = 0; i < products.size(); i++) {
 					ProductEntry product = products.get(i);
 					items[i] = new SelectItem(product.getProductId(), product.getTitle());
-					logger.info("Product: id = {0}, title = {1}", product.getProductId(), product.getTitle());
 				}
 			} catch (Exception e) {
 				logger.warn("Cannot create select items of product. Error: {0}", e.getMessage());

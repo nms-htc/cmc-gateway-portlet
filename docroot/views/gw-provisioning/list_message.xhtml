@@ -11,8 +11,8 @@
 			
 			<p:messages globalOnly="true" closable="true"/>
 			
-			<ui:include src="/views/gw-product/tab_nav.xhtml" >
-				<ui:param name="t" value="5	"/>
+			<ui:include src="/views/gw-provisioning/tab_nav.xhtml" >
+				<ui:param name="t" value="5"/>
 			</ui:include>
 
 			<br />
@@ -22,7 +22,7 @@
 
 
 			<p:dataTable id="listTable" widgetVar="listTable"
-				value="#{productEntryBean.lazyDataModel}" var="product"
+				value="#{provisioningMessageBean.lazyDataModel}" var="message"
 				rowIndexVar="index" rows="10" paginator="true"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 				rowsPerPageTemplate="10,15,20" paginatorPosition="bottom"
@@ -32,38 +32,43 @@
 					<h:outputText value="#{index + 1}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['code']}" filterBy="#{product.code}"
-					sortBy="#{product.code}">
-					<h:outputText value="${product.code}" />
-				</p:column>
-
-				<p:column headerText="#{i18n['title']}" filterBy="#{product.title}"
-					sortBy="#{product.title}">
-					<h:outputText value="${product.title}" />
+				<p:column headerText="#{i18n['provisioning-entry']}" filterBy="#{message.provisioningId}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('listTable').filter()">
+							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
+							<f:selectItems value="#{provisioningEntryBean.items}"/>
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="${provisioningEntryBean.getProvisioningTitle(message.provisioningId)}" />
 				</p:column>
 				
-				<p:column headerText="#{i18n['type']}" filterBy="#{product.productType}"
-					sortBy="#{product.productType}">
-					<h:outputText value="${product.productType}" />
+				<p:column headerText="#{i18n['response-code']}" filterBy="#{message.responseCode}"
+					sortBy="#{message.responseCode}">
+					<h:outputText value="${message.responseCode}" />
+				</p:column>
+
+				<p:column headerText="#{i18n['cause']}" filterBy="#{message.cause}"
+					sortBy="#{message.cause}">
+					<h:outputText value="${message.cause}" />
+				</p:column>
+				
+				<p:column headerText="#{i18n['cause-value']}" filterBy="#{message.causeValue}"
+					sortBy="#{message.causeValue}">
+					<h:outputText value="${message.causeValue}" />
 				</p:column>
 
 				<p:column headerText="#{i18n['description']}"
-					filterBy="#{product.description}" sortBy="#{product.description}">
-					<h:outputText value="${product.description}" />
-				</p:column>
-				
-				<p:column headerText="#{i18n['status']}"
-					sortBy="#{product.status}">
-					<h:outputText value="#{appDomainBean.getDomainTitle('PRODUCT_STATUS'.concat('-').concat(product.status))}" />
+					filterBy="#{message.description}" sortBy="#{message.description}">
+					<h:outputText value="${message.description}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['action']}" width="60">
-					<p:button outcome="edit_product" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{product.productId}" />
+					<p:button outcome="edit_message" icon="ui-icon-pencil">
+						<f:param name="entityId" value="#{message.messageId}" />
 					</p:button>
 
-					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productEntryBean.remove(product)}" update="@form">
-						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-product-message']}" icon="ui-icon-alert" />
+					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{provisioningMessageBean.remove(message)}" update="@form">
+						<p:confirm header="#{i18n['confirmation']}" message="#{i18n['confirm-delete-provisioning-message-message']}" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

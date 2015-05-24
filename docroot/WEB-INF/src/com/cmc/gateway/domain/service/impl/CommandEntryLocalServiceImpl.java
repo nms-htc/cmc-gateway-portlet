@@ -69,6 +69,13 @@ public class CommandEntryLocalServiceImpl extends
 			
 			commandEntry.setCreateDate(now);
 			commandEntry.setModifiedDate(now);
+			
+			try {
+				commandEntryPersistence.findByCode(commandEntry.getCode());
+				throw new PortalException("a-command-entry-with-code-has-been-exist-on-the-system");
+			} catch (NoSuchCommandEntryException e) {
+				// Good
+			}
 		} else {
 			commandEntry.setModifiedDate(now);
 		}
@@ -82,12 +89,5 @@ public class CommandEntryLocalServiceImpl extends
 		ValidateUtil.checkNull(commandEntry.getProvisioningType(), "provisioning-type");
 		ValidateUtil.checkNull(commandEntry.getCode(), "code");
 		ValidateUtil.checkNull(commandEntry.getTitle(), "title");
-		
-		try {
-			commandEntryPersistence.findByCode(commandEntry.getCode());
-			throw new PortalException("a-command-entry-with-code-has-been-exist-on-the-system");
-		} catch (NoSuchCommandEntryException e) {
-			// Good
-		}
 	}
 }
