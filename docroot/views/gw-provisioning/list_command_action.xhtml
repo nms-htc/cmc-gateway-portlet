@@ -44,7 +44,7 @@
 				
 				<p:column headerText="#{i18n['product-entry']}" filterBy="#{action.productId}">
 					<f:facet name="filter">
-						<p:selectOneMenu onchange="PF('listTable').filter()">
+						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Long">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{productEntryBean.items}"/>
 						</p:selectOneMenu>
@@ -89,7 +89,7 @@
 				
 				<p:column headerText="#{i18n['next-command-entry']}" filterBy="#{action.nextCommandId}">
 					<f:facet name="filter">
-						<p:selectOneMenu onchange="PF('listTable').filter()">
+						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Long">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{commandEntryBean.items}"/>
 						</p:selectOneMenu>

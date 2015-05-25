@@ -34,7 +34,7 @@
 
 				<p:column headerText="#{i18n['product']}" filterBy="#{action.productId}">
 					<f:facet name="filter">
-						<p:selectOneMenu onchange="PF('listTable').filter()">
+						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Long">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{productEntryBean.items}"/>
 						</p:selectOneMenu>
@@ -58,7 +58,7 @@
 					filterBy="#{action.subscriberType}"
 					sortBy="#{action.subscriberType}">
 					<f:facet name="filter">
-						<p:selectOneMenu onchange="PF('listTable').filter()">
+						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Integer">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{appDomainBean.getStringItems('SUBSCRIBER_TYPE')}"/>
 						</p:selectOneMenu>
@@ -69,12 +69,12 @@
 				<p:column headerText="#{i18n['command']}"
 					filterBy="#{action.commandId}">
 					<f:facet name="filter">
-						<p:selectOneMenu onchange="PF('listTable').filter()">
+						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Long">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{commandEntryBean.items}"/>
 						</p:selectOneMenu>
 					</f:facet>
-					<h:outputText value="#{commandEntryBean.getCommandTitle(action.getCommandId)}" />
+					<h:outputText value="#{commandEntryBean.getCommandTitle(action.commandId)}" />
 				</p:column>
 				
 				<p:column headerText="#{i18n['description']}"

@@ -9,8 +9,8 @@
 			<p:panel header="">
 
 				<f:facet name="header">
-					<h:outputText value="${i18n['add-new-provisioning-route']}" rendered="${provisioningRouteBean.current.routeId == 0}" />
-					<h:outputText value="${i18n['update-provisioning-route']}" rendered="${provisioningRouteBean.current.routeId != 0}" />
+					<h:outputText value="${i18n['add-new-provisioning-route']}" rendered="#{provisioningRouteBean.current.routeId == 0}" />
+					<h:outputText value="${i18n['update-provisioning-route']}" rendered="#{provisioningRouteBean.current.routeId != 0}" />
 				</f:facet>
 
 				<h:panelGrid columns="3" styleClass="panel-grid-form" columnClasses="form-label">
@@ -31,7 +31,7 @@
 					<p:inputText id="routeKey" value="#{provisioningRouteBean.current.routeKey}" size="30"/>
 					<p:message for="routeKey"/>
 					
-					<p:outputLabel value="#{i18n['route-type]}" for="routeType"/>
+					<p:outputLabel value="#{i18n['route-type']}" for="routeType"/>
 					<p:inputText id="routeType" value="#{provisioningRouteBean.current.routeType}" size="30"/>
 					<p:message for="routeType"/>
 					

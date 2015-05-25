@@ -9,8 +9,8 @@
 			<p:panel header="">
 
 				<f:facet name="header">
-					<h:outputText value="${i18n['add-new-provisioning-action']}" rendered="${provisioningActionBean.current.actionId == 0}" />
-					<h:outputText value="${i18n['update-provisioning-action']}" rendered="${provisioningActionBean.current.actionId != 0}" />
+					<h:outputText value="${i18n['add-new-provisioning-action']}" rendered="#{provisioningActionBean.current.actionId == 0}" />
+					<h:outputText value="${i18n['update-provisioning-action']}" rendered="#{provisioningActionBean.current.actionId != 0}" />
 				</f:facet>
 
 				<h:panelGrid columns="3" styleClass="panel-grid-form" columnClasses="form-label">
@@ -57,7 +57,7 @@
 					
 					<p:outputLabel value="#{i18n['status']}" for="status"/>
 					<p:selectOneMenu id="status" value="#{provisioningActionBean.current.status}">
-						<f:selectItems value="#{appDomainBean.getIntItems('PROVISIONGING_ACTION_STATUS')}"/>
+						<f:selectItems value="#{appDomainBean.getIntItems('PROVISIONING_ACTION_STATUS')}"/>
 					</p:selectOneMenu>
 					<p:message for="status"/>
 
