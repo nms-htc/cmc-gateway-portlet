@@ -74,7 +74,7 @@
 				
 				<p:column headerText="#{i18n['action']}" width="60">
 					<p:button outcome="edit_action" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{provisioning.actionId}" />
+						<f:param name="entityId" value="#{action.actionId}" />
 					</p:button>
 
 					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{provisioningActionBean.remove(provisioning)}" update="@form">
