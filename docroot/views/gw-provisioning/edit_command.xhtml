@@ -58,6 +58,11 @@
 					<p:outputLabel value="${i18n['description']}" for="description" />
 					<p:inputTextarea id="description" value="#{commandEntryBean.current.description}" cols="30" />
 					<p:message for="description" />
+					
+					<p:outputLabel value="${i18n['properties']}" for="properties" />
+					<p:inputTextarea id="properties"
+						value="#{productRouteBean.current.properties}" cols="30" />
+					<p:message for="description" />
 				</h:panelGrid>
 
 				<f:facet name="footer">

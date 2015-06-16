@@ -64,7 +64,7 @@
 				
 				<p:column headerText="#{i18n['action']}" width="60">
 					<p:button outcome="edit_route" icon="ui-icon-pencil">
-						<f:param name="entityId" value="#{route.productId}" />
+						<f:param name="entityId" value="#{route.routeId}" />
 					</p:button>
 
 					<p:commandButton icon="ui-icon-trash" immediate="true" actionListener="#{productRouteBean.remove(route)}" update="@form">
