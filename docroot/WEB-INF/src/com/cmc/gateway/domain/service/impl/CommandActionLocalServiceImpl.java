@@ -56,7 +56,7 @@ public class CommandActionLocalServiceImpl
 			
 			commandAction.setUserId(serviceContext.getUserId());
 			commandAction.setGroupId(serviceContext.getScopeGroupId());
-			commandAction.setCommandId(serviceContext.getCompanyId());
+			commandAction.setCompanyId(serviceContext.getCompanyId());
 			
 			commandAction.setCreateDate(now);
 			commandAction.setModifiedDate(now);

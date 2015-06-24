@@ -34,6 +34,7 @@
 				
 				<p:column headerText="#{i18n['command-entry']}" filterBy="#{action.commandId}">
 					<f:facet name="filter">
+						
 						<p:selectOneMenu onchange="PF('listTable').filter()" converter="javax.faces.Long">
 							<f:selectItem itemLabel="#{i18n['empty-select-option-label']}" itemValue="#{null}" noSelectionOption="true"/>
 							<f:selectItems value="#{commandEntryBean.items}"/>
