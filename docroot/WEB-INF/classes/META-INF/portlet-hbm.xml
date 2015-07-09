@@ -132,6 +132,7 @@
 		<property name="graceUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="properties" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.cmc.gateway.domain.model.impl.ProductMessageImpl" table="GW_ProductMessage">
 		<cache usage="read-write" />

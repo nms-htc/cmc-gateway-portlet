@@ -90,6 +90,7 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 		attributes.put("graceUnit", getGraceUnit());
 		attributes.put("status", getStatus());
 		attributes.put("description", getDescription());
+		attributes.put("properties", getProperties());
 
 		return attributes;
 	}
@@ -233,6 +234,12 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 
 		if (description != null) {
 			setDescription(description);
+		}
+
+		String properties = (String)attributes.get("properties");
+
+		if (properties != null) {
+			setProperties(properties);
 		}
 	}
 
@@ -436,6 +443,14 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 		_description = description;
 	}
 
+	public String getProperties() {
+		return _properties;
+	}
+
+	public void setProperties(String properties) {
+		_properties = properties;
+	}
+
 	public BaseModel<?> getProductEntryRemoteModel() {
 		return _productEntryRemoteModel;
 	}
@@ -486,6 +501,7 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 		clone.setGraceUnit(getGraceUnit());
 		clone.setStatus(getStatus());
 		clone.setDescription(getDescription());
+		clone.setProperties(getProperties());
 
 		return clone;
 	}
@@ -534,7 +550,7 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{productId=");
 		sb.append(getProductId());
@@ -582,13 +598,15 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 		sb.append(getStatus());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", properties=");
+		sb.append(getProperties());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.cmc.gateway.domain.model.ProductEntry");
@@ -686,6 +704,10 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>properties</column-name><column-value><![CDATA[");
+		sb.append(getProperties());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -716,5 +738,6 @@ public class ProductEntryClp extends BaseModelImpl<ProductEntry>
 	private String _graceUnit;
 	private int _status;
 	private String _description;
+	private String _properties;
 	private BaseModel<?> _productEntryRemoteModel;
 }

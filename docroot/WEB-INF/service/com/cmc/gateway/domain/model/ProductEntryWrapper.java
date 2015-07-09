@@ -69,6 +69,7 @@ public class ProductEntryWrapper implements ProductEntry,
 		attributes.put("graceUnit", getGraceUnit());
 		attributes.put("status", getStatus());
 		attributes.put("description", getDescription());
+		attributes.put("properties", getProperties());
 
 		return attributes;
 	}
@@ -211,6 +212,12 @@ public class ProductEntryWrapper implements ProductEntry,
 
 		if (description != null) {
 			setDescription(description);
+		}
+
+		String properties = (String)attributes.get("properties");
+
+		if (properties != null) {
+			setProperties(properties);
 		}
 	}
 
@@ -682,6 +689,24 @@ public class ProductEntryWrapper implements ProductEntry,
 	*/
 	public void setDescription(java.lang.String description) {
 		_productEntry.setDescription(description);
+	}
+
+	/**
+	* Returns the properties of this product entry.
+	*
+	* @return the properties of this product entry
+	*/
+	public java.lang.String getProperties() {
+		return _productEntry.getProperties();
+	}
+
+	/**
+	* Sets the properties of this product entry.
+	*
+	* @param properties the properties of this product entry
+	*/
+	public void setProperties(java.lang.String properties) {
+		_productEntry.setProperties(properties);
 	}
 
 	public boolean isNew() {

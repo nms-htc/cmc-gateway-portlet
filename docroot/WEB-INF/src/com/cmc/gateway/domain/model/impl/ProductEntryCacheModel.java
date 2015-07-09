@@ -35,7 +35,7 @@ public class ProductEntryCacheModel implements CacheModel<ProductEntry>,
 	Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{productId=");
 		sb.append(productId);
@@ -83,6 +83,8 @@ public class ProductEntryCacheModel implements CacheModel<ProductEntry>,
 		sb.append(status);
 		sb.append(", description=");
 		sb.append(description);
+		sb.append(", properties=");
+		sb.append(properties);
 		sb.append("}");
 
 		return sb.toString();
@@ -187,6 +189,13 @@ public class ProductEntryCacheModel implements CacheModel<ProductEntry>,
 			productEntryImpl.setDescription(description);
 		}
 
+		if (properties == null) {
+			productEntryImpl.setProperties(StringPool.BLANK);
+		}
+		else {
+			productEntryImpl.setProperties(properties);
+		}
+
 		productEntryImpl.resetOriginalValues();
 
 		return productEntryImpl;
@@ -215,4 +224,5 @@ public class ProductEntryCacheModel implements CacheModel<ProductEntry>,
 	public String graceUnit;
 	public int status;
 	public String description;
+	public String properties;
 }

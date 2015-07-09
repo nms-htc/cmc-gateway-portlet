@@ -102,7 +102,8 @@ create table GW_ProductEntry (
 	gracePeriod INTEGER,
 	graceUnit VARCHAR(75) null,
 	status INTEGER,
-	description STRING null
+	description STRING null,
+	properties VARCHAR(75) null
 );
 
 create table GW_ProductMessage (

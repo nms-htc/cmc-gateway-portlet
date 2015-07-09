@@ -68,7 +68,11 @@
 					<p:inputTextarea id="description"
 						value="#{productEntryBean.current.description}" cols="30" />
 					<p:message for="description" />
-
+					
+					<p:outputLabel value="${i18n['properties']}" for="properties" />
+					<p:inputTextarea id="properties"
+						value="#{productEntryBean.current.properties}" cols="30" />
+					<p:message for="properties" />
 
 				</h:panelGrid>
 

@@ -88,9 +88,10 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 			{ "gracePeriod", Types.INTEGER },
 			{ "graceUnit", Types.VARCHAR },
 			{ "status", Types.INTEGER },
-			{ "description", Types.VARCHAR }
+			{ "description", Types.VARCHAR },
+			{ "properties", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table GW_ProductEntry (productId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,categoryId LONG,productType VARCHAR(75) null,CODE VARCHAR(75) null,title VARCHAR(75) null,sku VARCHAR(75) null,price DOUBLE,subscriberTypes VARCHAR(75) null,termOfUse BOOLEAN,termPeriod INTEGER,termUnit VARCHAR(75) null,subscription BOOLEAN,subscriptionUnit VARCHAR(75) null,subscriptionPeriod INTEGER,gracePeriod INTEGER,graceUnit VARCHAR(75) null,status INTEGER,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table GW_ProductEntry (productId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,categoryId LONG,productType VARCHAR(75) null,CODE VARCHAR(75) null,title VARCHAR(75) null,sku VARCHAR(75) null,price DOUBLE,subscriberTypes VARCHAR(75) null,termOfUse BOOLEAN,termPeriod INTEGER,termUnit VARCHAR(75) null,subscription BOOLEAN,subscriptionUnit VARCHAR(75) null,subscriptionPeriod INTEGER,gracePeriod INTEGER,graceUnit VARCHAR(75) null,status INTEGER,description STRING null,properties VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table GW_ProductEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY productEntry.code ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY GW_ProductEntry.CODE ASC";
@@ -147,6 +148,7 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 		model.setGraceUnit(soapModel.getGraceUnit());
 		model.setStatus(soapModel.getStatus());
 		model.setDescription(soapModel.getDescription());
+		model.setProperties(soapModel.getProperties());
 
 		return model;
 	}
@@ -228,6 +230,7 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 		attributes.put("graceUnit", getGraceUnit());
 		attributes.put("status", getStatus());
 		attributes.put("description", getDescription());
+		attributes.put("properties", getProperties());
 
 		return attributes;
 	}
@@ -371,6 +374,12 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 
 		if (description != null) {
 			setDescription(description);
+		}
+
+		String properties = (String)attributes.get("properties");
+
+		if (properties != null) {
+			setProperties(properties);
 		}
 	}
 
@@ -686,6 +695,20 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 		_description = description;
 	}
 
+	@JSON
+	public String getProperties() {
+		if (_properties == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _properties;
+		}
+	}
+
+	public void setProperties(String properties) {
+		_properties = properties;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -741,6 +764,7 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 		productEntryImpl.setGraceUnit(getGraceUnit());
 		productEntryImpl.setStatus(getStatus());
 		productEntryImpl.setDescription(getDescription());
+		productEntryImpl.setProperties(getProperties());
 
 		productEntryImpl.resetOriginalValues();
 
@@ -926,12 +950,20 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 			productEntryCacheModel.description = null;
 		}
 
+		productEntryCacheModel.properties = getProperties();
+
+		String properties = productEntryCacheModel.properties;
+
+		if ((properties != null) && (properties.length() == 0)) {
+			productEntryCacheModel.properties = null;
+		}
+
 		return productEntryCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{productId=");
 		sb.append(getProductId());
@@ -979,13 +1011,15 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 		sb.append(getStatus());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", properties=");
+		sb.append(getProperties());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.cmc.gateway.domain.model.ProductEntry");
@@ -1083,6 +1117,10 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>properties</column-name><column-value><![CDATA[");
+		sb.append(getProperties());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1123,6 +1161,7 @@ public class ProductEntryModelImpl extends BaseModelImpl<ProductEntry>
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private String _description;
+	private String _properties;
 	private long _columnBitmask;
 	private ProductEntry _escapedModelProxy;
 }

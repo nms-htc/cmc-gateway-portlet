@@ -483,6 +483,7 @@ public class ProductEntryPersistenceImpl extends BasePersistenceImpl<ProductEntr
 		productEntryImpl.setGraceUnit(productEntry.getGraceUnit());
 		productEntryImpl.setStatus(productEntry.getStatus());
 		productEntryImpl.setDescription(productEntry.getDescription());
+		productEntryImpl.setProperties(productEntry.getProperties());
 
 		return productEntryImpl;
 	}

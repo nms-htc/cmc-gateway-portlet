@@ -420,6 +420,21 @@ public interface ProductEntryModel extends BaseModel<ProductEntry> {
 	 */
 	public void setDescription(String description);
 
+	/**
+	 * Returns the properties of this product entry.
+	 *
+	 * @return the properties of this product entry
+	 */
+	@AutoEscape
+	public String getProperties();
+
+	/**
+	 * Sets the properties of this product entry.
+	 *
+	 * @param properties the properties of this product entry
+	 */
+	public void setProperties(String properties);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

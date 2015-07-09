@@ -54,6 +54,7 @@ public class ProductEntrySoap implements Serializable {
 		soapModel.setGraceUnit(model.getGraceUnit());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setProperties(model.getProperties());
 
 		return soapModel;
 	}
@@ -298,6 +299,14 @@ public class ProductEntrySoap implements Serializable {
 		_description = description;
 	}
 
+	public String getProperties() {
+		return _properties;
+	}
+
+	public void setProperties(String properties) {
+		_properties = properties;
+	}
+
 	private long _productId;
 	private long _groupId;
 	private long _companyId;
@@ -321,4 +330,5 @@ public class ProductEntrySoap implements Serializable {
 	private String _graceUnit;
 	private int _status;
 	private String _description;
+	private String _properties;
 }

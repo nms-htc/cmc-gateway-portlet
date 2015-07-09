@@ -170,6 +170,7 @@
 			<basic name="graceUnit" />
 			<basic name="status" />
 			<basic name="description" />
+			<basic name="properties" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

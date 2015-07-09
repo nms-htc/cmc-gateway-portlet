@@ -67,6 +67,7 @@
 
 		<column name="status" type="int" />
 		<column name="description" type="String" />
+		<column name="properties" type="String" />
 
 		<!-- Order -->
 
@@ -87,11 +88,10 @@
 		<finder name="Code" return-type="ProductEntry" unique="true">
 			<finder-column name="code" />
 		</finder>
-		
-		<finder name="Status" return-type="Collection">
-			<finder-column name="status"/>
-		</finder>
 
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
 	</entity>
 
 	<entity name="ProductMessage" local-service="true">

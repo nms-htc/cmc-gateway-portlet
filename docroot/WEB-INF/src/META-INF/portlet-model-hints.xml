@@ -161,6 +161,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="properties" type="String" />
 	</model>
 	<model name="com.cmc.gateway.domain.model.ProductMessage">
 		<field name="messageId" type="long" />
